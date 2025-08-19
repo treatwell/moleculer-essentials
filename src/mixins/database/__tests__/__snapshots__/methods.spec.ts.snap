@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DB Mixin V2 methods > prepare update filter method > replace type > should throw if not a pipeline 1`] = `[Error: Replace with timestamps can only go through an aggregation pipeline with a single $replaceWith stage]`;
+
+exports[`DB Mixin V2 methods > prepare update filter method > update type > should prevent using replaceWith in updates 1`] = `[Error: $replaceWith/$replaceRoot can't be used in an update aggregation pipeline.]`;
+
+exports[`DB Mixin V2 methods > replaceOne method > should throw if update event and before doc 1`] = `[Error: Cannot send update event with returnDocument: before option]`;
+
+exports[`DB Mixin V2 methods > soft delete method > should throw if unknown scope 1`] = `[Error: Unknown soft delete scope test-deleted]`;
+
+exports[`DB Mixin V2 methods > tenant filter method > should throw if no params are passed 1`] = `[Error: Missing tenant field "foo" in params]`;
+
+exports[`DB Mixin V2 methods > tenant filter method > should throw if params does not have field 1`] = `[Error: Missing tenant field "foo" in params]`;
+
+exports[`DB Mixin V2 methods > updateOne method > should throw if update event and before doc 1`] = `[Error: Cannot send update event with returnDocument: before option]`;
