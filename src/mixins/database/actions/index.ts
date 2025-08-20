@@ -1,16 +1,16 @@
-import { Document, ObjectId } from 'mongodb';
-import { Context, Service } from 'moleculer';
-import { Readable } from 'stream';
+import type { Document, ObjectId } from 'mongodb';
+import type { Context, Service } from 'moleculer';
+import type { Readable } from 'stream';
 import { ZodType } from 'zod/v4';
 import { createOpenAPIResponses } from '../../../openapi/index.js';
-import {
+import type {
   DatabaseActionNames,
   DatabaseActionPublishedNames,
   DatabaseMethodsOptions,
   KeyString,
   TenantParams,
 } from '../mixin-types.js';
-import {
+import type {
   DatabaseActionCountInternalParams,
   DatabaseActionCountParams,
   DatabaseActionCreateParams,
@@ -26,7 +26,7 @@ import {
 } from './types.js';
 import { DatabaseMethodsMixin } from '../methods.js';
 import { EntityNotFoundError } from '../errors.js';
-import { CustomActionSchema } from '../../../types/index.js';
+import type { CustomActionSchema } from '../../../types/actions.js';
 import { AjvActionSchemaFactory } from './ajv.js';
 import { parseAndValidateQuery } from './helpers.js';
 import { ActionSchemaFactory } from './shared.js';

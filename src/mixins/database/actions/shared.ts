@@ -1,7 +1,7 @@
-import { Document } from 'mongodb';
+import type { Document } from 'mongodb';
 import { ZodType } from 'zod/v4';
-import { ValidationSchema } from '../../../validator/types.js';
-import { KeyString } from '../mixin-types.js';
+import type { ValidationSchema } from '../../../validator/types.js';
+import type { KeyString } from '../mixin-types.js';
 
 export enum QueryOp {
   GT = '$gt',

@@ -1,6 +1,6 @@
 import { z } from 'zod/v4';
 
-import { OperationObject, SchemaObject } from './types.js';
+import type { OperationObject, SchemaObject } from './types.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type OpenAPIResponses = SchemaObject<NonNullable<any>> | z.ZodType;

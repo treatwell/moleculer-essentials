@@ -2,7 +2,7 @@ import { isPlainObject, isArray } from 'lodash';
 import { CoerceArrayTransformer } from './transformers/coerce-array.js';
 import { DateTransformer } from './transformers/date.js';
 import { ObjectIdTransformer } from './transformers/object-id.js';
-import {
+import type {
   ValidationSchema,
   Transformer,
   Transform,

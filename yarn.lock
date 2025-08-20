@@ -2026,7 +2026,29 @@ __metadata:
     vitest: "npm:^3.2.4"
     zod: "npm:^4.0.17"
   peerDependencies:
+    "@aws-crypto/client-node": ^4.2.1
+    bullmq: ^5.12.10
+    ioredis: ^5.2.3
+    jsonwebtoken: ^9.0.2
+    jwks-rsa: ^3.0.1
+    mongodb: ^6.15.0
+    redlock: ^4.2.0
     zod: ^3.25.0 || ^4.0.0
+  peerDependenciesMeta:
+    "@aws-crypto/client-node":
+      optional: true
+    bullmq:
+      optional: true
+    ioredis:
+      optional: true
+    jsonwebtoken:
+      optional: true
+    jwks-rsa:
+      optional: true
+    mongodb:
+      optional: true
+    redlock:
+      optional: true
   languageName: unknown
   linkType: soft
 

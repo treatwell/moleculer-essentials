@@ -1,10 +1,10 @@
-import { Queue, RepeatOptions } from 'bullmq';
-import { Redis } from 'ioredis';
+import { Queue, type RepeatOptions } from 'bullmq';
+import type { Redis } from 'ioredis';
 import { isFunction } from 'lodash';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
 import { createRedisConnection } from './queue-utils.js';
-import { QueueMixinOptions } from './types.js';
+import type { QueueMixinOptions } from './types.js';
 
 export type RepeatableJob = { name: string; data?: unknown } & RepeatOptions;
 

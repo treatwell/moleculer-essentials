@@ -2,7 +2,7 @@
 import { isString } from 'lodash';
 import { ObjectId } from 'bson';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
-import { ValidationSchema, Transformer } from '../types.js';
+import type { ValidationSchema, Transformer } from '../types.js';
 
 export class ObjectIdTransformer
   extends LeafTransformerBase

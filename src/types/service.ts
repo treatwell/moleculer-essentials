@@ -1,7 +1,11 @@
-import { ServiceDependency, ServiceHooks, Service } from 'moleculer';
-import { CustomActionSchema } from './actions.js';
-import { OptionallyArray, UnionToIntersection, Unpacked } from './utils.js';
-import { ServiceEventSchema } from './events.js';
+import type { ServiceDependency, ServiceHooks, Service } from 'moleculer';
+import type { CustomActionSchema } from './actions.js';
+import type {
+  OptionallyArray,
+  UnionToIntersection,
+  Unpacked,
+} from './utils.js';
+import type { ServiceEventSchema } from './events.js';
 
 /**
  * This type represent what is accessible from the `this` in a service file.

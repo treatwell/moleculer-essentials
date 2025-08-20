@@ -6,49 +6,145 @@
     "type": "git",
     "url": "https://github.com/treatwell/moleculer-essentials"
   },
-  "version": "1.0.1",
+  "version": "0.0.0",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "exports": {
-    "require": {
-      "types": "./dist/index.d.cts",
-      "default": "./dist/index.cjs"
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
     },
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
+    "./mixins/database": {
+      "require": {
+        "types": "./dist/mixins/database.mixin.d.cts",
+        "default": "./dist/mixins/database.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/database.mixin.d.mts",
+        "default": "./dist/mixins/database.mixin.mjs"
+      }
+    },
+    "./mixins/queue": {
+      "require": {
+        "types": "./dist/mixins/queue.mixin.d.cts",
+        "default": "./dist/mixins/queue.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/queue.mixin.d.mts",
+        "default": "./dist/mixins/queue.mixin.mjs"
+      }
+    },
+    "./mixins/encryptor": {
+      "require": {
+        "types": "./dist/mixins/encryptor.mixin.d.cts",
+        "default": "./dist/mixins/encryptor.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/encryptor.mixin.d.mts",
+        "default": "./dist/mixins/encryptor.mixin.mjs"
+      }
+    },
+    "./mixins/global-store": {
+      "require": {
+        "types": "./dist/mixins/global-store.mixin.d.cts",
+        "default": "./dist/mixins/global-store.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/global-store.mixin.d.mts",
+        "default": "./dist/mixins/global-store.mixin.mjs"
+      }
+    },
+    "./mixins/jwt": {
+      "require": {
+        "types": "./dist/mixins/jwt.mixin.d.cts",
+        "default": "./dist/mixins/jwt.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/jwt.mixin.d.mts",
+        "default": "./dist/mixins/jwt.mixin.mjs"
+      }
+    },
+    "./mixins/redis": {
+      "require": {
+        "types": "./dist/mixins/redis.mixin.d.cts",
+        "default": "./dist/mixins/redis.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/redis.mixin.d.mts",
+        "default": "./dist/mixins/redis.mixin.mjs"
+      }
+    },
+    "./mixins/redlock": {
+      "require": {
+        "types": "./dist/mixins/redlock.mixin.d.cts",
+        "default": "./dist/mixins/redlock.mixin.cjs"
+      },
+      "import": {
+        "types": "./dist/mixins/redlock.mixin.d.mts",
+        "default": "./dist/mixins/redlock.mixin.mjs"
+      }
     }
   },
   "scripts": {
-    "build": "pkgroll",
+    "build": "pkgroll --clean-dist",
     "prepack": "run build",
     "test": "vitest",
     "test:types": "tsc --noEmit",
     "test:lint": "eslint . --max-warnings=0 && prettier -c ."
   },
   "dependencies": {
-    "@aws-crypto/client-node": "^4.2.1",
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
     "ajv-keywords": "^5.1.0",
     "bson": "^6.2.0",
-    "bullmq": "^5.12.10",
     "date-fns": "^2.21.3",
+    "lodash": "^4.17.20",
+    "moleculer": "^0.14.33",
+    "pino": "^8.20.0",
+    "pino-pretty": "^11.0.0"
+  },
+  "peerDependencies": {
+    "@aws-crypto/client-node": "^4.2.1",
+    "bullmq": "^5.12.10",
     "ioredis": "^5.2.3",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.0.1",
-    "lodash": "^4.17.20",
-    "moleculer": "^0.14.33",
     "mongodb": "^6.15.0",
-    "pino": "^8.20.0",
-    "pino-pretty": "^11.0.0",
-    "redlock": "^4.2.0"
-  },
-  "peerDependencies": {
+    "redlock": "^4.2.0",
     "zod": "^3.25.0 || ^4.0.0"
   },
+  "peerDependenciesMeta": {
+    "@aws-crypto/client-node": {
+      "optional": true
+    },
+    "bullmq": {
+      "optional": true
+    },
+    "ioredis": {
+      "optional": true
+    },
+    "jsonwebtoken": {
+      "optional": true
+    },
+    "jwks-rsa": {
+      "optional": true
+    },
+    "mongodb": {
+      "optional": true
+    },
+    "redlock": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@aws-crypto/client-node": "^4.2.1",
     "@eslint/js": "^9.33.0",
     "@treatwell/eslint-plugin-moleculer": "^1.1.0-beta.3",
     "@tsconfig/node-lts": "^22.0.2",
@@ -56,13 +152,19 @@
     "@types/lodash": "^4.17.20",
     "@types/node": "^24.3.0",
     "@types/redlock": "^4.0.2",
+    "bullmq": "^5.12.10",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "ioredis": "^5.2.3",
     "jiti": "^2.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.0.1",
+    "mongodb": "^6.15.0",
     "mongodb-memory-server": "^10.2.0",
     "pkgroll": "^2.15.3",
     "prettier": "^3.6.2",
+    "redlock": "^4.2.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
     "vitest": "^3.2.4",
@@ -71,5 +173,8 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "packageManager": "yarn@4.9.2"
 }

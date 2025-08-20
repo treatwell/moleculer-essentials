@@ -1,6 +1,6 @@
 import { isEqual, isMatch } from 'lodash';
-import { Collection } from 'mongodb';
-import { IndexTuple, MongoIndex } from './types.js';
+import type { Collection } from 'mongodb';
+import type { IndexTuple, MongoIndex } from './types.js';
 
 const {
   MONGO_URL = '',

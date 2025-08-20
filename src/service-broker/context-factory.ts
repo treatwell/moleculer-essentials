@@ -1,8 +1,8 @@
 import Moleculer, {
   Context,
-  ServiceBroker,
-  Endpoint,
-  GenericObject,
+  type ServiceBroker,
+  type Endpoint,
+  type GenericObject,
 } from 'moleculer';
 
 /**

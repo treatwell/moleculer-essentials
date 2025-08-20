@@ -1,12 +1,12 @@
-import {
+import type {
   CollationOptions,
   Document,
   Filter,
   InferIdType,
   ObjectId,
 } from 'mongodb';
-import { KeyString } from '../mixin-types.js';
-import {
+import type { KeyString } from '../mixin-types.js';
+import type {
   DatabaseSoftDeleteScope,
   WithDbFields,
   WithOptionalId,

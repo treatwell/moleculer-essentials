@@ -1,5 +1,5 @@
 import { isArray } from 'lodash';
-import { Transformer, ValidationSchema } from '../types.js';
+import type { Transformer, ValidationSchema } from '../types.js';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
 import { COERCE_ARRAY_ATTRIBUTE } from '../../json-schema/index.js';
 

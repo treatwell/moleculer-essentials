@@ -1,6 +1,6 @@
 import { isEqual } from 'lodash';
-import { Collection } from 'mongodb';
-import { Context } from 'moleculer';
+import type { Collection } from 'mongodb';
+import type { Context } from 'moleculer';
 import { wrapMixin } from '../../../types/index.js';
 import {
   isIndexEqual,
@@ -9,12 +9,12 @@ import {
   shouldAutoDropIndexes,
 } from './utils.js';
 import {
-  IndexState,
+  type IndexState,
   IndexStatus,
-  IndexTuple,
-  ListSearchIndex,
-  MongoIndex,
-  SearchIndexDefinition,
+  type IndexTuple,
+  type ListSearchIndex,
+  type MongoIndex,
+  type SearchIndexDefinition,
 } from './types.js';
 
 /**

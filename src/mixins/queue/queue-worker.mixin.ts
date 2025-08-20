@@ -1,9 +1,9 @@
-import { Job, Worker, WorkerOptions } from 'bullmq';
-import { Redis } from 'ioredis';
+import { type Job, Worker, type WorkerOptions } from 'bullmq';
+import type { Redis } from 'ioredis';
 import { isFunction } from 'lodash';
 import { wrapMixin } from '../../types/index.js';
 import { createRedisConnection } from './queue-utils.js';
-import { QueueMixinOptions, WithoutConnection } from './types.js';
+import type { QueueMixinOptions, WithoutConnection } from './types.js';
 
 export type JobMeta = {
   job?: Job;

@@ -1,8 +1,8 @@
 import {
   Service,
-  ServiceSchema,
-  ServiceBroker,
-  ServiceSettingSchema,
+  type ServiceSchema,
+  type ServiceBroker,
+  type ServiceSettingSchema,
 } from 'moleculer';
 
 /**

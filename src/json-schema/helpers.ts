@@ -1,5 +1,5 @@
 import { omit, pick } from 'lodash';
-import { JSONSchemaType, SomeJSONSchema } from './base-types.js';
+import type { JSONSchemaType, SomeJSONSchema } from './base-types.js';
 import { SCHEMA_REF_NAME } from './constants.js';
 
 export function omitFields<

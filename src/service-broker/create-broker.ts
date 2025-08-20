@@ -1,4 +1,4 @@
-import { BrokerOptions, ServiceBroker } from 'moleculer';
+import { type BrokerOptions, ServiceBroker } from 'moleculer';
 import { AjvValidator } from '../validator/index.js';
 import { ZodValidator } from '../validator/zod-validator.js';
 import { ServiceFactory } from './service-factory.js';

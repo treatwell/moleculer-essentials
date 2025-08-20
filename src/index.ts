@@ -72,11 +72,6 @@ export {
 } from './service-broker/index.js';
 
 /**
- * Export mixins.
- */
-export * from './mixins/index.js';
-
-/**
  * Export middlewares.
  */
 export * from './middlewares/index.js';

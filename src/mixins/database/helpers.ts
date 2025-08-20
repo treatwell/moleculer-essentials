@@ -1,10 +1,10 @@
-import { Filter, WithId } from 'mongodb';
+import type { Filter, WithId } from 'mongodb';
 import {
-  JSONSchemaType,
+  type JSONSchemaType,
   omitFields,
   optionalFields,
 } from '../../json-schema/index.js';
-import { WithOptionalId } from './types.js';
+import type { WithOptionalId } from './types.js';
 
 export function removeMongoId<T>(
   schema: JSONSchemaType<WithId<T>>,

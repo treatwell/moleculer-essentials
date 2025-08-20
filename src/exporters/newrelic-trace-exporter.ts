@@ -1,5 +1,10 @@
 import { defaultsDeep, isFunction } from 'lodash';
-import { LoggerInstance, Span, Tracer, TracerExporters } from 'moleculer';
+import {
+  type LoggerInstance,
+  type Span,
+  type Tracer,
+  TracerExporters,
+} from 'moleculer';
 import { flattenTags } from './utils.js';
 
 export type NewrelicTraceExporterOptions = {

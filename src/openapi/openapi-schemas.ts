@@ -1,5 +1,5 @@
 import { Errors } from 'moleculer';
-import { JSONSchemaType } from '../json-schema/index.js';
+import type { JSONSchemaType } from '../json-schema/index.js';
 
 export const ServerErrorSchema: JSONSchemaType<
   Omit<Errors.MoleculerServerError, 'cause'>

@@ -1,16 +1,17 @@
-import { Context, ServiceSchema } from 'moleculer';
-import { wrapMixin, Alias, CustomActionSchema } from '../types/index.js';
+import type { Context, ServiceSchema } from 'moleculer';
+import type { Alias, CustomActionSchema } from '../types/actions.js';
 import { generateOpenAPISpec } from './generate-doc.js';
 import {
   FileNotExistSchema,
   FileTooBigSchema,
-  GetOpenApiParams,
+  type GetOpenApiParams,
   GetOpenApiParamsSchema,
   ServerErrorSchema,
   UnauthorizedErrorSchema,
   ValidationErrorSchema,
 } from './openapi-schemas.js';
-import { Document } from './types.js';
+import type { Document } from './types.js';
+import { wrapMixin } from '../types/index.js';
 
 export type OpenAPIMixinOptions = {
   /**

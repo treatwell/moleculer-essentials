@@ -1,5 +1,5 @@
-import { Redis, RedisOptions } from 'ioredis';
-import { Service } from 'moleculer';
+import { Redis, type RedisOptions } from 'ioredis';
+import type { Service } from 'moleculer';
 import { GlobalStoreMixin } from './global-store.mixin.js';
 import { wrapMixin } from '../types/index.js';
 

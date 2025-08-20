@@ -1,10 +1,15 @@
-import { Redis } from 'ioredis';
-import { Job, JobsOptions, QueueEvents, QueueEventsOptions } from 'bullmq';
+import type { Redis } from 'ioredis';
+import {
+  type Job,
+  type JobsOptions,
+  QueueEvents,
+  type QueueEventsOptions,
+} from 'bullmq';
 import { isFunction } from 'lodash';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
 import { createRedisConnection } from './queue-utils.js';
-import { QueueMixinOptions, WithoutConnection } from './types.js';
+import type { QueueMixinOptions, WithoutConnection } from './types.js';
 
 /**
  * This Mixin add the capability to wait on a job.

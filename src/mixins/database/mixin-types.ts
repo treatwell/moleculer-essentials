@@ -1,9 +1,9 @@
-import { Document, InferIdType, ObjectId, WithoutId } from 'mongodb';
-import { ActionVisibility } from 'moleculer';
+import type { Document, InferIdType, ObjectId, WithoutId } from 'mongodb';
+import type { ActionVisibility } from 'moleculer';
 import { ZodObject, ZodType } from 'zod/v4';
-import { JSONSchemaType } from '../../json-schema/index.js';
-import { ValidationSchema } from '../../validator/types.js';
-import { ActionSchemaFactory } from './actions/shared.js';
+import type { JSONSchemaType } from '../../json-schema/index.js';
+import type { ValidationSchema } from '../../validator/types.js';
+import type { ActionSchemaFactory } from './actions/shared.js';
 
 /**
  * Utility type to extract the string keys of a type.

@@ -1,4 +1,4 @@
-import { CollationOptions, Document } from 'mongodb';
+import type { CollationOptions, Document } from 'mongodb';
 
 export type MongoIndex = {
   key: Record<string, 1 | -1>;

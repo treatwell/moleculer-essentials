@@ -1,6 +1,6 @@
-import { Errors, Service } from 'moleculer';
-import { Redis, RedisOptions } from 'ioredis';
-import Redlock, { CompatibleRedisClient } from 'redlock';
+import { Errors, type Service } from 'moleculer';
+import { Redis, type RedisOptions } from 'ioredis';
+import Redlock, { type CompatibleRedisClient } from 'redlock';
 import { wrapMixin } from '../types/index.js';
 import { GlobalStoreMixin } from './global-store.mixin.js';
 

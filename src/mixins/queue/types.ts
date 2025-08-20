@@ -1,4 +1,4 @@
-import { Service } from 'moleculer';
+import type { Service } from 'moleculer';
 
 export type QueueMixinOptions = {
   brokerURL:

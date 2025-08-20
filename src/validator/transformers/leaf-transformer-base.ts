@@ -1,4 +1,4 @@
-import { TransformField, ValidationSchema } from '../types.js';
+import type { TransformField, ValidationSchema } from '../types.js';
 
 export abstract class LeafTransformerBase {
   transformMap = new WeakMap();

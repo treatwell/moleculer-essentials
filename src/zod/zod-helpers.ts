@@ -1,9 +1,9 @@
 import { ObjectId } from 'bson';
 import { parseISO } from 'date-fns';
 import { z, ZodType } from 'zod';
-import { SomeJSONSchema } from '../json-schema/index.js';
+import type { SomeJSONSchema } from '../json-schema/index.js';
 import { OpenAPIExtractor } from '../openapi/index.js';
-import { ReferenceObject, SchemaObject } from '../openapi/types.js';
+import type { ReferenceObject, SchemaObject } from '../openapi/types.js';
 
 /**
  * Simple recursive function to replace all `$ref` in an object.

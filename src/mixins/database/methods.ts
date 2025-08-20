@@ -1,4 +1,4 @@
-import {
+import type {
   Collection,
   CollectionOptions,
   Filter,
@@ -9,10 +9,10 @@ import {
   ObjectId,
   OptionalId,
 } from 'mongodb';
-import { Readable } from 'stream';
-import { Context } from 'moleculer';
+import type { Readable } from 'stream';
+import type { Context } from 'moleculer';
 import { optimizeQuery } from './helpers.js';
-import {
+import type {
   DatabaseCountOptions,
   DatabaseDeleteManyOptions,
   DatabaseDeleteOneOptions,
@@ -28,7 +28,7 @@ import {
   DatabaseEventDelete,
   DatabaseSoftDeleteScope,
 } from './types.js';
-import {
+import type {
   DatabaseMethodsOptions,
   KeyString,
   TenantParams,

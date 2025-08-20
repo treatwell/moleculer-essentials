@@ -1,4 +1,8 @@
-import http, { IncomingMessage, ServerResponse, STATUS_CODES } from 'http';
+import http, {
+  type IncomingMessage,
+  type ServerResponse,
+  STATUS_CODES,
+} from 'http';
 import { defaultsDeep } from 'lodash';
 import type { ServiceBroker, Middleware } from 'moleculer';
 

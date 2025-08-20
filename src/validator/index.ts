@@ -18,7 +18,7 @@ import {
   applyAfterTransforms,
 } from './transformers.js';
 import { AjvExtractor } from './ajv-extractor.js';
-import { ValidationSchema } from './types.js';
+import type { ValidationSchema } from './types.js';
 import {
   COERCE_ARRAY_ATTRIBUTE,
   SCHEMA_REF_NAME,

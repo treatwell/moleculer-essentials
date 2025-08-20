@@ -1,7 +1,7 @@
 import { parseISO } from 'date-fns';
 import { isNaN, isString } from 'lodash';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
-import { ValidationSchema, Transformer } from '../types.js';
+import type { ValidationSchema, Transformer } from '../types.js';
 
 export class DateTransformer
   extends LeafTransformerBase

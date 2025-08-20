@@ -1,12 +1,12 @@
-import { Redis } from 'ioredis';
+import type { Redis } from 'ioredis';
 import { Errors } from 'moleculer';
-import { Job, JobsOptions, Queue, QueueOptions } from 'bullmq';
+import { type Job, type JobsOptions, Queue, type QueueOptions } from 'bullmq';
 import { isFunction } from 'lodash';
 
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
 import { createRedisConnection } from './queue-utils.js';
-import { QueueMixinOptions, WithoutConnection } from './types.js';
+import type { QueueMixinOptions, WithoutConnection } from './types.js';
 
 /**
  * This Mixin add the capability to launch a job.

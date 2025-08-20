@@ -1,19 +1,19 @@
-import { Document } from 'mongodb';
+import type { Document } from 'mongodb';
 import {
   COERCE_ARRAY_ATTRIBUTE,
-  JSONSchemaType,
+  type JSONSchemaType,
   OBJECTID_TYPE,
   SCHEMA_REF_NAME,
 } from '../../../json-schema/index.js';
-import { ValidationSchema } from '../../../validator/types.js';
+import type { ValidationSchema } from '../../../validator/types.js';
 import { removeMongoId } from '../helpers.js';
 import {
-  ActionCountParamsOptions,
-  ActionCreateParamsOptions,
-  ActionGetParamsOptions,
-  ActionListParamsOptions,
-  ActionSchemaFactory,
-  ActionSchemaFactoryOptions,
+  type ActionCountParamsOptions,
+  type ActionCreateParamsOptions,
+  type ActionGetParamsOptions,
+  type ActionListParamsOptions,
+  type ActionSchemaFactory,
+  type ActionSchemaFactoryOptions,
   QueryOp,
 } from './shared.js';
 

@@ -1,4 +1,4 @@
-import { Redis, RedisOptions } from 'ioredis';
+import { Redis, type RedisOptions } from 'ioredis';
 import { parseURL } from 'ioredis/built/utils';
 
 export function createRedisConnection(url: string): Redis {

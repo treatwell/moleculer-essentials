@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { JSONSchemaType } from '../json-schema/index.js';
+import type { JSONSchemaType } from '../json-schema/index.js';
 
 export interface ContactObject {
   name?: string;

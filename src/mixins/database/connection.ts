@@ -1,9 +1,9 @@
 import {
-  Collection,
-  CollectionOptions,
+  type Collection,
+  type CollectionOptions,
   MongoClient,
-  CreateCollectionOptions,
-  MongoError,
+  type CreateCollectionOptions,
+  type MongoError,
 } from 'mongodb';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';

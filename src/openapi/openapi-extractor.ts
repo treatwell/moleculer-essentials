@@ -1,6 +1,6 @@
-import { SomeJSONSchema } from '../json-schema/index.js';
+import type { SomeJSONSchema } from '../json-schema/index.js';
 import { RefExtractor } from '../validator/ref-extractor.js';
-import { Document } from './types.js';
+import type { Document } from './types.js';
 
 export class OpenAPIExtractor extends RefExtractor {
   private readonly doc: Document;

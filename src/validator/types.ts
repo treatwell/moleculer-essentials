@@ -1,4 +1,4 @@
-import { JSONSchemaType } from '../json-schema/index.js';
+import type { JSONSchemaType } from '../json-schema/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ValidationSchema = JSONSchemaType<any>;

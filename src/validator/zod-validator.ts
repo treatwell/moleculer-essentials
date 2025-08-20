@@ -1,10 +1,10 @@
 import {
-  ActionHandler,
-  Context,
+  type ActionHandler,
+  type Context,
   Errors,
   Validators,
-  ServiceEventHandler,
-  ActionSchema,
+  type ServiceEventHandler,
+  type ActionSchema,
 } from 'moleculer';
 import { z, ZodType } from 'zod/v4';
 import { getSchemaFromMoleculer } from './utils.js';

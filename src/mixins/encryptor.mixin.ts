@@ -3,7 +3,7 @@ import {
   CommitmentPolicy,
   getLocalCryptographicMaterialsCache,
   KmsKeyringNode,
-  KeyringNode,
+  type KeyringNode,
   NodeCachingMaterialsManager,
   RawAesKeyringNode,
   RawAesWrappingSuiteIdentifier,

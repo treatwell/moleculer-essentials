@@ -1,4 +1,4 @@
-import { GenericObject } from 'moleculer';
+import type { GenericObject } from 'moleculer';
 import { isObject } from 'lodash';
 
 /**

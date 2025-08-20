@@ -1,13 +1,13 @@
-import { Document } from 'mongodb';
+import type { Document } from 'mongodb';
 import { z, ZodObject, ZodType } from 'zod/v4';
 import { zodCoerceArray, zodObjectId } from '../../../zod/zod-helpers.js';
 import {
-  ActionCountParamsOptions,
-  ActionCreateParamsOptions,
-  ActionGetParamsOptions,
-  ActionListParamsOptions,
-  ActionSchemaFactory,
-  ActionSchemaFactoryOptions,
+  type ActionCountParamsOptions,
+  type ActionCreateParamsOptions,
+  type ActionGetParamsOptions,
+  type ActionListParamsOptions,
+  type ActionSchemaFactory,
+  type ActionSchemaFactoryOptions,
   QueryOp,
 } from './shared.js';
 

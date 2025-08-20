@@ -1,6 +1,6 @@
-import { ServiceSchema } from 'moleculer';
-import { CustomServiceSchema } from './service.js';
-import { CustomActionSchema, Alias } from './actions.js';
+import type { ServiceSchema } from 'moleculer';
+import type { CustomServiceSchema } from './service.js';
+import type { CustomActionSchema, Alias } from './actions.js';
 
 /**
  * This function is a NO-OP and is only useful for Typescript types.

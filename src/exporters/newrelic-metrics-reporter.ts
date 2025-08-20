@@ -1,11 +1,11 @@
 import { defaultsDeep, isFunction } from 'lodash';
 import {
   MetricReporters,
-  MetricRegistry,
-  LoggerInstance,
-  GaugeMetricSnapshot,
-  HistogramMetricSnapshot,
-  MetricReporterOptions,
+  type MetricRegistry,
+  type LoggerInstance,
+  type GaugeMetricSnapshot,
+  type HistogramMetricSnapshot,
+  type MetricReporterOptions,
 } from 'moleculer';
 import { flattenTags } from './utils.js';
 

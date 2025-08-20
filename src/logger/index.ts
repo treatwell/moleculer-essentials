@@ -1,6 +1,6 @@
-import { Logger, pino } from 'pino';
-import { hostname } from 'os';
-import { LoggerBindings, LoggerConfig } from 'moleculer';
+import { type Logger, pino } from 'pino';
+import { hostname } from 'node:os';
+import type { LoggerBindings, LoggerConfig } from 'moleculer';
 
 const FILTER_SERVICE_LOGS_REGEX =
   /('[^']*' service is registered\.)|(Service '[^']*' started\.)|('[^']*' finished starting\.)/;

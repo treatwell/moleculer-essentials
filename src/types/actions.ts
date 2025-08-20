@@ -11,7 +11,7 @@ import type {
   Service,
   TracingActionOptions,
 } from 'moleculer';
-import { OperationObject } from '../openapi/index.js';
+import type { OperationObject } from '../openapi/index.js';
 
 export interface CustomActionSchema<T = unknown> {
   // Copied from moleculer -> ActionSchema

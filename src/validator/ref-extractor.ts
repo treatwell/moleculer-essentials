@@ -1,8 +1,8 @@
 import { isEqual, omit } from 'lodash';
 import {
-  JSONSchemaType,
+  type JSONSchemaType,
   SCHEMA_REF_NAME,
-  SomeJSONSchema,
+  type SomeJSONSchema,
 } from '../json-schema/index.js';
 
 /**

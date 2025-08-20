@@ -1,14 +1,14 @@
 import { merge } from 'lodash';
-import { ServiceSchema } from 'moleculer';
+import type { ServiceSchema } from 'moleculer';
 import { ZodObject, ZodOptional, ZodType } from 'zod/v4';
 import {
-  JSONSchemaType,
+  type JSONSchemaType,
   omitFields,
-  SomeJSONSchema,
+  type SomeJSONSchema,
 } from '../json-schema/index.js';
-import { Alias } from '../types/index.js';
+import type { Alias } from '../types/index.js';
 import { getSchemaFromMoleculer } from '../validator/utils.js';
-import {
+import type {
   Document,
   OperationObject,
   ParameterObject,

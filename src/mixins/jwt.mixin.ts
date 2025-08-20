@@ -1,14 +1,14 @@
 import {
-  JwtHeader,
-  PrivateKey,
+  type JwtHeader,
+  type PrivateKey,
   sign as jwtSign,
-  SigningKeyCallback,
-  SignOptions,
+  type SigningKeyCallback,
+  type SignOptions,
   verify,
-  VerifyOptions,
+  type VerifyOptions,
 } from 'jsonwebtoken';
-import { JwksClient, Options } from 'jwks-rsa';
-import { Context, Errors } from 'moleculer';
+import { JwksClient, type Options } from 'jwks-rsa';
+import { type Context, Errors } from 'moleculer';
 import { wrapMixin } from '../types/index.js';
 
 export type JwtSignerMixinSettings = {
