@@ -107,7 +107,7 @@
     "date-fns": "^2.21.3",
     "lodash-es": "^4.17.21",
     "moleculer": "^0.14.33",
-    "pino": "^8.20.0",
+    "pino": "^9.9.0",
     "pino-pretty": "^11.0.0"
   },
   "peerDependencies": {
