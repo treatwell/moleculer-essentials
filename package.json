@@ -165,6 +165,7 @@
     "pkgroll": "^2.15.3",
     "prettier": "^3.6.2",
     "redlock": "^4.2.0",
+    "semantic-release": "^24.2.7",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
     "vitest": "^3.2.4",

@@ -17,7 +17,7 @@ const keyPair = generateKeyPairSync('ec', {
   },
 });
 
-describe('Test treatwell auth service', () => {
+describe('Test JWT mixin', () => {
   const broker = createServiceBroker();
 
   const svc = broker.createService(
