@@ -8,7 +8,9 @@ const FILTER_SERVICE_LOGS_REGEX =
 let transport: TransportSingleOptions | undefined;
 if (process.env.NODE_ENV !== 'production') {
   transport = {
-    target: './pino-pretty-transport.cjs',
+    // Building with pkgroll (rollup) will bundle the file into the root index.js so we keep
+    // `logger/` in the path.
+    target: './logger/pino-pretty-transport.cjs',
     options: {
       colorize: true,
       singleLine: true,
