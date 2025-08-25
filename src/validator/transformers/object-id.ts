@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isString } from 'lodash';
+import { isString } from 'lodash-es';
 import { ObjectId } from 'bson';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
 import type { ValidationSchema, Transformer } from '../types.js';

@@ -1,6 +1,6 @@
 import { FlowProducer, type QueueBaseOptions } from 'bullmq';
 import type { Redis } from 'ioredis';
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 import { wrapMixin } from '../../types/index.js';
 import { createRedisConnection } from './queue-utils.js';
 import type { QueueMixinOptions, WithoutConnection } from './types.js';

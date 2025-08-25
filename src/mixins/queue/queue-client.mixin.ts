@@ -1,7 +1,7 @@
 import type { Redis } from 'ioredis';
 import { Errors } from 'moleculer';
 import { type Job, type JobsOptions, Queue, type QueueOptions } from 'bullmq';
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';

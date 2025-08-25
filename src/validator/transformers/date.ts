@@ -1,5 +1,5 @@
 import { parseISO } from 'date-fns';
-import { isNaN, isString } from 'lodash';
+import { isNaN, isString } from 'lodash-es';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
 import type { ValidationSchema, Transformer } from '../types.js';
 

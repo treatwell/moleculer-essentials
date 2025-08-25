@@ -5,7 +5,7 @@ import {
   QueueEvents,
   type QueueEventsOptions,
 } from 'bullmq';
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
 import { createRedisConnection } from './queue-utils.js';

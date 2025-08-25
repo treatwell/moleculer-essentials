@@ -1,4 +1,4 @@
-import { defaultsDeep, isFunction } from 'lodash';
+import { defaultsDeep, isFunction } from 'lodash-es';
 import {
   MetricReporters,
   type MetricRegistry,
