@@ -1975,15 +1975,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@treatwell/eslint-plugin-moleculer@npm:^1.1.0-beta.3":
-  version: 1.1.0-beta.3
-  resolution: "@treatwell/eslint-plugin-moleculer@npm:1.1.0-beta.3"
+"@treatwell/eslint-plugin-moleculer@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@treatwell/eslint-plugin-moleculer@npm:1.1.0"
   dependencies:
     "@typescript-eslint/utils": "npm:^8.40.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10c0/08847058b8aa081307d419519f9bdeb5b967505005b05c2ea52a253a156a01d0c0df163db1484def9978490826f8506aef1a6c53bf9b9452bcb328035fe8455c
+  checksum: 10c0/813adb1b5dda39d37aaeea49d68b7d6e49a5f9a3eacee8a9431f9aaf21f6b3a17fabb9f6b33b587021e5a65946936d2fc53d92e44801dd2aeb1be563ae3611ec
   languageName: node
   linkType: hard
 
@@ -1993,7 +1993,7 @@ __metadata:
   dependencies:
     "@aws-crypto/client-node": "npm:^4.2.1"
     "@eslint/js": "npm:^9.33.0"
-    "@treatwell/eslint-plugin-moleculer": "npm:^1.1.0-beta.3"
+    "@treatwell/eslint-plugin-moleculer": "npm:^1.1.0"
     "@tsconfig/node-lts": "npm:^22.0.2"
     "@types/jsonwebtoken": "npm:^9.0.10"
     "@types/lodash": "npm:^4.17.20"
