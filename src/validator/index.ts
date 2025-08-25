@@ -11,7 +11,7 @@ import {
 } from 'moleculer';
 import addFormats from 'ajv-formats';
 import addKeywords from 'ajv-keywords';
-import { constant } from 'lodash';
+import { constant } from 'lodash-es';
 import {
   loadTransforms,
   applyBeforeTransforms,

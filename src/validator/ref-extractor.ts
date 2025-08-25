@@ -1,4 +1,4 @@
-import { isEqual, omit } from 'lodash';
+import { isEqual, omit } from 'lodash-es';
 import {
   type JSONSchemaType,
   SCHEMA_REF_NAME,

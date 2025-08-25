@@ -1,4 +1,4 @@
-import { omit, pick } from 'lodash';
+import { omit, pick } from 'lodash-es';
 import type { JSONSchemaType, SomeJSONSchema } from './base-types.js';
 import { SCHEMA_REF_NAME } from './constants.js';
 
