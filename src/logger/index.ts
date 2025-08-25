@@ -1,11 +1,11 @@
-import { type Logger, pino } from 'pino';
+import { type Logger, type TransportSingleOptions, pino } from 'pino';
 import { hostname } from 'node:os';
 import type { LoggerBindings, LoggerConfig } from 'moleculer';
 
 const FILTER_SERVICE_LOGS_REGEX =
   /('[^']*' service is registered\.)|(Service '[^']*' started\.)|('[^']*' finished starting\.)/;
 
-let transport: pino.TransportSingleOptions | undefined;
+let transport: TransportSingleOptions | undefined;
 if (process.env.NODE_ENV !== 'production') {
   transport = {
     target: './pino-pretty-transport.cjs',
@@ -38,7 +38,7 @@ const logger = pino({
      * This function allow logs like `logger.info('str 1', {a: 1}, 'str 2', ...)` to
      * be formatted correctly (every string are concatenated into one and objects are merged in the log).
      */
-    logMethod(args, method) {
+    logMethod(args: (string | Error | object)[], method) {
       const mergingObject: Record<string, unknown> = {};
       let msg = '';
 
@@ -47,7 +47,7 @@ const logger = pino({
           mergingObject.err = arg;
         } else if (typeof arg === 'string') {
           msg += (msg ? ' ' : '') + arg;
-        } else if (arg && typeof arg.msg === 'string') {
+        } else if (arg && 'msg' in arg && typeof arg.msg === 'string') {
           msg += (msg ? ' ' : '') + arg.msg;
           Object.assign(mergingObject, arg);
         } else {
