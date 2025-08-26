@@ -1,4 +1,5 @@
 import { Errors } from 'moleculer';
+import { z } from 'zod/v4';
 import type { JSONSchemaType } from '../json-schema/index.js';
 
 export const ServerErrorSchema: JSONSchemaType<
@@ -93,11 +94,6 @@ export const ValidationErrorSchema: JSONSchemaType<
   },
 };
 
-export type GetOpenApiParams = { kind?: string };
+export const GetOpenApiParamsSchema = z.object({ kind: z.string().optional() });
 
-export const GetOpenApiParamsSchema: JSONSchemaType<GetOpenApiParams> = {
-  type: 'object',
-  additionalProperties: false,
-  required: [],
-  properties: { kind: { type: 'string' } },
-};
+export type GetOpenApiParams = z.infer<typeof GetOpenApiParamsSchema>;
