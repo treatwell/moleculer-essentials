@@ -124,3 +124,12 @@ export function createLoggerConfig(): LoggerConfig {
 }
 
 export const defaultLogger = createLogger({ label: 'default' });
+
+/**
+ * Augment pino to something closer to what Moleculer is using.
+ */
+declare module 'pino' {
+  interface LogFn {
+    (msg: string, ...args: (Error | object)[]): void;
+  }
+}
