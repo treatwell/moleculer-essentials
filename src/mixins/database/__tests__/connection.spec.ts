@@ -2,24 +2,10 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { MongoClient } from 'mongodb';
 import { createServiceBroker } from '../../../service-broker/index.js';
 import { wrapService } from '../../../types/index.js';
-import { AjvValidator } from '../../../validator/index.js';
 import { DatabaseConnectionMixin } from '../connection.js';
 
 describe('DB Mixin V2 connection', () => {
-  const broker = createServiceBroker({
-    validator: new AjvValidator<'default'>(
-      {
-        default: {
-          useDefaults: true,
-          coerceTypes: true,
-          allErrors: true,
-          removeAdditional: false,
-          discriminator: true,
-        },
-      },
-      'default',
-    ),
-  });
+  const broker = createServiceBroker();
 
   const svcA = broker.createService(
     wrapService({
