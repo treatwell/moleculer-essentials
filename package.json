@@ -153,7 +153,7 @@
     "@types/node": "^24.3.0",
     "@types/redlock": "^4.0.2",
     "bullmq": "^5.12.10",
-    "eslint": "^9.33.0",
+    "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "ioredis": "^5.2.3",
