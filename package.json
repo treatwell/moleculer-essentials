@@ -145,7 +145,7 @@
   },
   "devDependencies": {
     "@aws-crypto/client-node": "^4.2.1",
-    "@eslint/js": "^9.33.0",
+    "@eslint/js": "^9.34.0",
     "@treatwell/eslint-plugin-moleculer": "^1.1.0",
     "@tsconfig/node-lts": "^22.0.2",
     "@types/jsonwebtoken": "^9.0.10",
