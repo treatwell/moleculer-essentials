@@ -3,7 +3,6 @@ import { Collection } from 'mongodb';
 import { Context } from 'moleculer';
 import { createServiceBroker } from '../../../service-broker/index.js';
 import { wrapService } from '../../../types/index.js';
-import { AjvValidator } from '../../../validator/index.js';
 import { addQueryOps } from '../actions/ajv.js';
 import { QueryOp } from '../actions/shared.js';
 import { DatabaseConnectionMixin } from '../connection.js';
@@ -11,20 +10,7 @@ import { DatabaseMethodsMixin } from '../methods.js';
 import { DatabaseMethodsOptions } from '../mixin-types.js';
 
 describe('DB Mixin V2 methods', () => {
-  const broker = createServiceBroker({
-    validator: new AjvValidator<'default'>(
-      {
-        default: {
-          useDefaults: true,
-          coerceTypes: true,
-          allErrors: true,
-          removeAdditional: false,
-          discriminator: true,
-        },
-      },
-      'default',
-    ),
-  });
+  const broker = createServiceBroker();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const opts: DatabaseMethodsOptions<any, any> = {
