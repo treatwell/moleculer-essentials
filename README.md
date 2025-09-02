@@ -32,10 +32,10 @@ and middlewares.
 
 ## Installation
 
-Install `moleculer-essentials` with your package manager:
+You need to add both `moleculer-essentials` and `moleculer` in your dependencies:
 
 ```bash
-  yarn add @treatwell/moleculer-essentials
+  yarn add @treatwell/moleculer-essentials moleculer
 ```
 
 ## Companion Packages

@@ -109,7 +109,6 @@
     "bson": "^6.2.0",
     "date-fns": "^2.21.3",
     "lodash-es": "^4.17.21",
-    "moleculer": "^0.14.33",
     "pino": "^9.9.0",
     "pino-pretty": "^13.1.1"
   },
@@ -119,6 +118,7 @@
     "ioredis": "^5.2.3",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.0.1",
+    "moleculer": "^0.14.33",
     "mongodb": "^6.15.0",
     "redlock": "^4.2.0",
     "zod": "^3.25.0 || ^4.0.0"
@@ -165,6 +165,7 @@
     "jiti": "^2.5.1",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.0.1",
+    "moleculer": "^0.14.33",
     "mongodb": "^6.15.0",
     "mongodb-memory-server": "^10.2.0",
     "pkgroll": "^2.15.3",
