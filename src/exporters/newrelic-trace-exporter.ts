@@ -1,4 +1,4 @@
-import { defaultsDeep, isFunction } from 'lodash-es';
+import { defaultsDeep } from 'es-toolkit/compat';
 import {
   type LoggerInstance,
   type Span,
@@ -78,9 +78,10 @@ export class NewrelicTraceExporter extends TracerExporters.Base {
       this.timer.unref();
     }
 
-    this.defaultTags = isFunction(this.opts.defaultTags)
-      ? this.opts.defaultTags.call(this, tracer)
-      : this.opts.defaultTags;
+    this.defaultTags =
+      typeof this.opts.defaultTags === 'function'
+        ? this.opts.defaultTags.call(this, tracer)
+        : this.opts.defaultTags;
     if (this.defaultTags) {
       this.defaultTags = flattenTags(this.defaultTags, true);
     }

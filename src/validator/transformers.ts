@@ -1,4 +1,4 @@
-import { isPlainObject, isArray } from 'lodash-es';
+import { isPlainObject } from 'es-toolkit';
 import { CoerceArrayTransformer } from './transformers/coerce-array.js';
 import { DateTransformer } from './transformers/date.js';
 import { ObjectIdTransformer } from './transformers/object-id.js';
@@ -28,7 +28,7 @@ function applyTransform<T, U>(
 
   switch (transformLevel.type) {
     case 'this': {
-      if (!isPlainObject(parent) && !isArray(parent)) {
+      if (!isPlainObject(parent) && !Array.isArray(parent)) {
         return;
       }
 
@@ -59,7 +59,7 @@ function applyTransform<T, U>(
       }
       break;
     case 'loop': {
-      if (!isArray(parent[dataKey])) {
+      if (!Array.isArray(parent[dataKey])) {
         return;
       }
 

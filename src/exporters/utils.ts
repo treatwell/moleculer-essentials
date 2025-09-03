@@ -1,5 +1,5 @@
 import type { GenericObject } from 'moleculer';
-import { isObject } from 'lodash-es';
+import { isObject } from 'es-toolkit/compat';
 
 /**
  * >>> Override base flattenTags function to handle objectIDs.

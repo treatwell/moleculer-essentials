@@ -5,7 +5,6 @@ import {
   QueueEvents,
   type QueueEventsOptions,
 } from 'bullmq';
-import { isFunction } from 'lodash-es';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
 import { createRedisConnection } from './queue-utils.js';
@@ -93,9 +92,10 @@ export function QueueEventsClient<N extends string>(
         );
       }
 
-      const key = isFunction(opts.brokerURL)
-        ? await opts.brokerURL(this)
-        : opts.brokerURL;
+      const key =
+        typeof opts.brokerURL === 'function'
+          ? await opts.brokerURL(this)
+          : opts.brokerURL;
       this[kKey] = key;
 
       let connection = this.getFromStore('redis', key);

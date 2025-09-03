@@ -1,5 +1,4 @@
 import { parseISO } from 'date-fns';
-import { isNaN, isString } from 'lodash-es';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
 import type { ValidationSchema, Transformer } from '../types.js';
 
@@ -17,11 +16,11 @@ export class DateTransformer
   };
 
   afterTransformer = (val: string | unknown): Date | unknown => {
-    if (!isString(val)) {
+    if (typeof val !== 'string') {
       return val;
     }
     const date = parseISO(val);
-    if (isNaN(date.getTime())) {
+    if (Number.isNaN(date.getTime())) {
       return val;
     }
     return date;

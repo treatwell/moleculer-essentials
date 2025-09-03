@@ -1,4 +1,4 @@
-import { defaultsDeep, isFunction } from 'lodash-es';
+import { defaultsDeep } from 'es-toolkit/compat';
 import {
   MetricReporters,
   type MetricRegistry,
@@ -94,9 +94,10 @@ export class NewrelicMetricsReporter extends MetricReporters.Base {
       this.timer.unref();
     }
 
-    const defaultTags = isFunction(this.opts.defaultTags)
-      ? this.opts.defaultTags.call(this, registry)
-      : this.opts.defaultTags;
+    const defaultTags =
+      typeof this.opts.defaultTags === 'function'
+        ? this.opts.defaultTags.call(this, registry)
+        : this.opts.defaultTags;
 
     if (defaultTags) {
       this.defaultTags = flattenTags(defaultTags, true);

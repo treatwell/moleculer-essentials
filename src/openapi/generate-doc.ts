@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es';
+import { merge } from 'es-toolkit';
 import type { ServiceSchema } from 'moleculer';
 import { ZodObject, ZodOptional, ZodType } from 'zod/v4';
 import {

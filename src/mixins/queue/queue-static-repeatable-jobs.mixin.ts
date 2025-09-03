@@ -1,6 +1,5 @@
 import { Queue, type RepeatOptions } from 'bullmq';
 import type { Redis } from 'ioredis';
-import { isFunction } from 'lodash-es';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
 import { createRedisConnection } from './queue-utils.js';
@@ -79,9 +78,10 @@ export function QueueStaticRepeatableJobs(
     mixins: [GlobalStoreMixin<Redis>()],
     methods: {
       async registerRepeatableJobs() {
-        const key = isFunction(opts.brokerURL)
-          ? await opts.brokerURL(this)
-          : opts.brokerURL;
+        const key =
+          typeof opts.brokerURL === 'function'
+            ? await opts.brokerURL(this)
+            : opts.brokerURL;
         this[kKey] = key;
         let connection = this.getFromStore('redis', key);
         if (!connection) {

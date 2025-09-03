@@ -3,7 +3,7 @@ import http, {
   type ServerResponse,
   STATUS_CODES,
 } from 'http';
-import { defaultsDeep } from 'lodash-es';
+import { defaultsDeep } from 'es-toolkit/compat';
 import type { ServiceBroker, Middleware } from 'moleculer';
 
 type HealthCheckOptions = {
