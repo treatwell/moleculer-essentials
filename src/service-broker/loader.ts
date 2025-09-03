@@ -2,7 +2,7 @@
 // the same logic used in K8S labels.
 // See https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
-import { defaultsDeep } from 'lodash-es';
+import { defaultsDeep } from 'es-toolkit/compat';
 import type { ServiceSchema } from 'moleculer';
 
 export type LabelValue = string;

@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import type { Collection } from 'mongodb';
 import type { Context } from 'moleculer';
 import { wrapMixin } from '../../../types/index.js';

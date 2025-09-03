@@ -11,7 +11,6 @@ import {
 } from 'moleculer';
 import addFormats from 'ajv-formats';
 import addKeywords from 'ajv-keywords';
-import { constant } from 'lodash-es';
 import {
   loadTransforms,
   applyBeforeTransforms,
@@ -105,7 +104,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
       // which already includes the pattern.
       validator.addFormat('object-id', {
         type: 'string',
-        validate: constant(true),
+        validate: () => true,
       });
     }
   }

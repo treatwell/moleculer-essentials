@@ -1,4 +1,3 @@
-import { isArray } from 'lodash-es';
 import type { Transformer, ValidationSchema } from '../types.js';
 import { LeafTransformerBase } from './leaf-transformer-base.js';
 import { COERCE_ARRAY_ATTRIBUTE } from '../../json-schema/index.js';
@@ -10,7 +9,7 @@ export class CoerceArrayTransformer
   implements Transformer<unknown[], unknown>
 {
   beforeTransformer = (val: unknown | unknown[]): unknown[] | null => {
-    if (isArray(val) || val === null) {
+    if (Array.isArray(val) || val === null) {
       return val;
     }
     return [val];

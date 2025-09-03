@@ -1,4 +1,4 @@
-import { isEqual, isMatch } from 'lodash-es';
+import { isEqual, isMatch } from 'es-toolkit/compat';
 import type { Collection } from 'mongodb';
 import type { IndexTuple, MongoIndex } from './types.js';
 

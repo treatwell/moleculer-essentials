@@ -1,4 +1,4 @@
-import { omit, partition, pick } from 'lodash-es';
+import { omit, partition, pick } from 'es-toolkit';
 
 function getFieldMode(fields: string[] | undefined): 'allow' | 'deny' {
   // Get the first field as reference (use second if first is _id)
