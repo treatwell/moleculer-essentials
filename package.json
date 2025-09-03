@@ -112,7 +112,7 @@
   },
   "peerDependencies": {
     "@aws-crypto/client-node": "^4.2.1",
-    "bullmq": "^5.12.10",
+    "bullmq": "^5.58.4",
     "ioredis": "^5.2.3",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.0.1",
@@ -152,7 +152,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^24.3.0",
     "@types/redlock": "^4.0.2",
-    "bullmq": "^5.12.10",
+    "bullmq": "^5.58.4",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",

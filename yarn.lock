@@ -2541,7 +2541,7 @@ __metadata:
     ajv-formats: "npm:^2.1.1"
     ajv-keywords: "npm:^5.1.0"
     bson: "npm:^6.2.0"
-    bullmq: "npm:^5.12.10"
+    bullmq: "npm:^5.58.4"
     date-fns: "npm:^2.21.3"
     eslint: "npm:^9.33.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -2566,7 +2566,7 @@ __metadata:
     zod: "npm:^4.0.17"
   peerDependencies:
     "@aws-crypto/client-node": ^4.2.1
-    bullmq: ^5.12.10
+    bullmq: ^5.58.4
     ioredis: ^5.2.3
     jsonwebtoken: ^9.0.2
     jwks-rsa: ^3.0.1
@@ -3483,9 +3483,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bullmq@npm:^5.12.10":
-  version: 5.58.0
-  resolution: "bullmq@npm:5.58.0"
+"bullmq@npm:^5.58.4":
+  version: 5.58.4
+  resolution: "bullmq@npm:5.58.4"
   dependencies:
     cron-parser: "npm:^4.9.0"
     ioredis: "npm:^5.4.1"
@@ -3494,7 +3494,7 @@ __metadata:
     semver: "npm:^7.5.4"
     tslib: "npm:^2.0.0"
     uuid: "npm:^9.0.0"
-  checksum: 10c0/b23b20c027ead063721ec9d5b9b81433b068df7536e8916c2a156adda56c99b97646981df5b88523bd7ccd3e0056d83ec80d398749740a344a5d9d7c04c953a7
+  checksum: 10c0/666a2e72557d2e712515fbfaa594266296d03a980f28f823e12373812d8cb5f70409ba282faba781889fa0758df64b955e599feffa2797c4125f92f0b9ba0d33
   languageName: node
   linkType: hard
 
