@@ -2599,7 +2599,7 @@ __metadata:
     jsonwebtoken: "npm:^9.0.2"
     jwks-rsa: "npm:^3.0.1"
     moleculer: "npm:^0.14.33"
-    mongodb: "npm:^6.15.0"
+    mongodb: "npm:^6.19.0"
     mongodb-memory-server: "npm:^10.2.0"
     pino: "npm:^9.9.0"
     pino-pretty: "npm:^13.1.1"
@@ -2618,7 +2618,7 @@ __metadata:
     jsonwebtoken: ^9.0.2
     jwks-rsa: ^3.0.1
     moleculer: ^0.14.33
-    mongodb: ^6.15.0
+    mongodb: ^6.19.0
     redlock: ^4.2.0
     zod: ^3.25.0 || ^4.0.0
   peerDependenciesMeta:
@@ -7342,7 +7342,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.15.0, mongodb@npm:^6.9.0":
+"mongodb@npm:^6.19.0":
+  version: 6.19.0
+  resolution: "mongodb@npm:6.19.0"
+  dependencies:
+    "@mongodb-js/saslprep": "npm:^1.1.9"
+    bson: "npm:^6.10.4"
+    mongodb-connection-string-url: "npm:^3.0.0"
+  peerDependencies:
+    "@aws-sdk/credential-providers": ^3.188.0
+    "@mongodb-js/zstd": ^1.1.0 || ^2.0.0
+    gcp-metadata: ^5.2.0
+    kerberos: ^2.0.1
+    mongodb-client-encryption: ">=6.0.0 <7"
+    snappy: ^7.3.2
+    socks: ^2.7.1
+  peerDependenciesMeta:
+    "@aws-sdk/credential-providers":
+      optional: true
+    "@mongodb-js/zstd":
+      optional: true
+    gcp-metadata:
+      optional: true
+    kerberos:
+      optional: true
+    mongodb-client-encryption:
+      optional: true
+    snappy:
+      optional: true
+    socks:
+      optional: true
+  checksum: 10c0/b25d6bedbb3d85b059fc6aa1e48d585722945b5fdf96cf6767a48069c13636e5e1d004908b1f095f580d0d03c8973c37f55325ce659a8c7f35c7414be23627fc
+  languageName: node
+  linkType: hard
+
+"mongodb@npm:^6.9.0":
   version: 6.18.0
   resolution: "mongodb@npm:6.18.0"
   dependencies:

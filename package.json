@@ -119,7 +119,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.0.1",
     "moleculer": "^0.14.33",
-    "mongodb": "^6.15.0",
+    "mongodb": "^6.19.0",
     "redlock": "^4.2.0",
     "zod": "^3.25.0 || ^4.0.0"
   },
@@ -165,7 +165,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.0.1",
     "moleculer": "^0.14.33",
-    "mongodb": "^6.15.0",
+    "mongodb": "^6.19.0",
     "mongodb-memory-server": "^10.2.0",
     "pkgroll": "^2.15.3",
     "prettier": "^3.6.2",
