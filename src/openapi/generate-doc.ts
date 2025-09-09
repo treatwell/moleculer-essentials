@@ -1,6 +1,6 @@
 import { merge } from 'es-toolkit';
 import type { ServiceSchema } from 'moleculer';
-import { ZodObject, ZodOptional, ZodType } from 'zod/v4';
+import { z, ZodObject, ZodOptional, ZodType } from 'zod/v4';
 import {
   type JSONSchemaType,
   omitFields,
@@ -13,7 +13,6 @@ import type {
   OperationObject,
   ParameterObject,
   RequestBodyObject,
-  ResponseObject,
   ResponsesObject,
 } from './types.js';
 import { OpenAPIExtractor } from './openapi-extractor.js';
@@ -168,20 +167,31 @@ export function createOperationFromAlias(
   const responses: ResponsesObject = {};
   if (openapi.responses) {
     for (const [key, val] of Object.entries(openapi.responses)) {
-      responses[key] = val;
+      const res = { ...val };
 
-      // Extract schema from responses
-      const content = (val as ResponseObject).content?.['application/json'];
+      if ('content' in res) {
+        res.content = { ...res.content };
 
-      if (
-        content &&
-        'zodInstance' in content &&
-        typeof content.zodInstance === 'function'
-      ) {
-        content.schema = zodToOpenAPISchema(content.zodInstance(), extractor);
-      } else if (content?.schema) {
-        content.schema = extractor.extract(content.schema);
+        // Extract schema from responses without mutating original definition.
+        let content = res.content['application/json'];
+        if (content) {
+          res.content['application/json'] = { ...content };
+          content = res.content['application/json'];
+        }
+
+        // Extract $refs from schema if needed
+        if (
+          content &&
+          'zodInstance' in content &&
+          typeof content.zodInstance === 'function'
+        ) {
+          content.schema = zodToOpenAPISchema(content.zodInstance(), extractor);
+        } else if (content?.schema) {
+          content.schema = extractor.extract(content.schema);
+        }
       }
+
+      responses[key] = res;
     }
   }
 
@@ -309,8 +319,14 @@ export function createOperationFromZodParams(
         Object.fromEntries(parameters.map(p => [p.name, true])) as never,
       );
     }
-    if (alias.action.bodySchemaRefName) {
-      zodBody = zodBody.meta({ id: alias.action.bodySchemaRefName });
+    const { bodySchemaRefName } = alias.action;
+
+    if (bodySchemaRefName) {
+      if (z.globalRegistry._idmap.has(bodySchemaRefName)) {
+        zodBody = z.globalRegistry._idmap.get(bodySchemaRefName) as ZodObject;
+      } else {
+        zodBody = zodBody.meta({ id: bodySchemaRefName });
+      }
     }
 
     requestBody = {
