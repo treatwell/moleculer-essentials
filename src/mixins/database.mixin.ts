@@ -12,5 +12,4 @@ export * from './database/indexes/utils.js';
 export * from './database/helpers.js';
 export * from './database/methods.js';
 export * from './database/mixin-types.js';
-export * from './database/restricted-fields.js';
 export * from './database/types.js';
