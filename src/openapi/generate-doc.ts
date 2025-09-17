@@ -1,4 +1,4 @@
-import { merge } from 'es-toolkit';
+import { merge } from 'es-toolkit/compat';
 import type { ServiceSchema } from 'moleculer';
 import { z, ZodObject, ZodOptional, ZodType } from 'zod/v4';
 import {

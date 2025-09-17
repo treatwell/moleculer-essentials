@@ -11,7 +11,7 @@ import type {
 } from 'mongodb';
 import type { Readable } from 'stream';
 import type { Context } from 'moleculer';
-import { optimizeQuery } from './helpers.js';
+import { optimizeQuery, getQueryFromList } from './helpers.js';
 import type {
   DatabaseCountOptions,
   DatabaseDeleteManyOptions,
@@ -35,7 +35,6 @@ import type {
 } from './mixin-types.js';
 import { createActions } from './actions/index.js';
 import { wrapMixin } from '../../types/index.js';
-import { getQueryFromList } from './restricted-fields.js';
 
 export function DatabaseMethodsMixin<
   TSchema extends Document & { _id: ObjectId | string },

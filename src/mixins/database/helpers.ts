@@ -39,3 +39,26 @@ export function optimizeQuery<T extends Record<string, unknown>>(
     $or: $or.map(predicate => ({ ...predicate, ...rest })),
   };
 }
+
+/**
+ * Return an object with each list item as key and 1/0/-1 as value
+ * to be used in mongo projection or sort.
+ */
+export function getQueryFromList<
+  T extends 'sort' | 'projection',
+  NotOp extends T extends 'sort' ? -1 : 0,
+>(type: T, list?: string[]): Record<string, 1 | NotOp> | undefined {
+  if (!list?.length) {
+    return undefined;
+  }
+  const res: Record<string, 1 | NotOp> = {};
+  list.forEach(el => {
+    if (el.startsWith('-')) {
+      const p = el.slice(1);
+      res[p] = (type === 'sort' ? -1 : 0) as NotOp;
+    } else {
+      res[el] = 1;
+    }
+  });
+  return res;
+}
