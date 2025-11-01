@@ -152,7 +152,7 @@
     "@treatwell/eslint-plugin-moleculer": "^1.1.0",
     "@tsconfig/node-lts": "^22.0.2",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.6.1",
+    "@types/node": "^24.9.2",
     "@types/redlock": "^4.0.7",
     "bullmq": "^5.59.0",
     "eslint": "^9.36.0",
