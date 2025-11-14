@@ -1,5 +1,5 @@
 import type { Document } from 'mongodb';
-import { ZodType } from 'zod/v4';
+import type { ZodType } from 'zod/v4';
 import type { ValidationSchema } from '../../../validator/types.js';
 import type { KeyString } from '../mixin-types.js';
 

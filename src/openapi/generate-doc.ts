@@ -1,6 +1,6 @@
 import { merge } from 'es-toolkit/compat';
 import type { ServiceSchema } from 'moleculer';
-import { z, ZodObject, ZodOptional, ZodType } from 'zod/v4';
+import { z, type ZodObject, type ZodOptional, type ZodType } from 'zod/v4';
 import {
   type JSONSchemaType,
   omitFields,
@@ -16,7 +16,7 @@ import type {
   ResponsesObject,
 } from './types.js';
 import { OpenAPIExtractor } from './openapi-extractor.js';
-import { zodToOpenAPISchema } from '../zod/zod-helpers.js';
+import { isZodSchema, zodToOpenAPISchema } from '../zod/zod-helpers.js';
 
 type HTTPMethod =
   | 'get'
@@ -130,7 +130,7 @@ export function createOperationFromAlias(
   const params = getSchemaFromMoleculer(alias.action.params);
 
   // Create params from Zod/Ajv Schema
-  if (params instanceof ZodType) {
+  if (isZodSchema(params)) {
     ({ parameters, requestBody } = createOperationFromZodParams(
       params,
       pathParams,
@@ -279,7 +279,7 @@ export function createOperationFromZodParams(
   const parameters: ParameterObject[] = [];
   let requestBody: RequestBodyObject | undefined;
 
-  if (!(params instanceof ZodObject)) {
+  if (!isZodSchema<ZodObject>(params, 'object')) {
     throw new Error(
       `Expected params to be an ZodObject in ${alias.actionName}`,
     );
@@ -308,7 +308,7 @@ export function createOperationFromZodParams(
           in: 'query',
           name: key,
           schema: zodToOpenAPISchema(val, extractor),
-          required: !(val instanceof ZodOptional),
+          required: !isZodSchema<ZodOptional>(val, 'optional'),
         })),
     );
   } else if (params) {

@@ -1,6 +1,10 @@
 import type { Document } from 'mongodb';
-import { z, ZodObject, ZodType } from 'zod/v4';
-import { zodCoerceArray, zodObjectId } from '../../../zod/zod-helpers.js';
+import { z, type ZodType, type ZodObject } from 'zod/v4';
+import {
+  isZodSchema,
+  zodCoerceArray,
+  zodObjectId,
+} from '../../../zod/zod-helpers.js';
 import {
   type ActionCountParamsOptions,
   type ActionCreateParamsOptions,
@@ -25,7 +29,7 @@ export class ZodActionSchemaFactory<TSchema extends Document>
   constructor(private opts: ActionSchemaFactoryOptions<ZodType, TSchema>) {
     const { schema, tenantField } = opts;
     if (schema) {
-      if (!(schema instanceof ZodObject)) {
+      if (!isZodSchema<ZodObject>(schema, 'object')) {
         throw new Error('Schema must be a ZodObject');
       }
       if (tenantField) {
@@ -48,7 +52,7 @@ export class ZodActionSchemaFactory<TSchema extends Document>
       return this.schemaWithDbFields;
     }
     const { timestamps, schema, schemaName } = this.opts;
-    if (!schema || !(schema instanceof ZodObject)) {
+    if (!isZodSchema<ZodObject>(schema, 'object')) {
       throw new Error('Schema is not a ZodObject');
     }
     let res = schema.required({ _id: true });
@@ -176,7 +180,7 @@ export class ZodActionSchemaFactory<TSchema extends Document>
     const { schema } = this.opts;
     const { allowClientId } = params;
 
-    if (!schema || !(schema instanceof ZodObject)) {
+    if (!isZodSchema<ZodObject>(schema, 'object')) {
       throw new Error('Schema is not a ZodObject');
     }
     if (allowClientId) {
@@ -187,7 +191,7 @@ export class ZodActionSchemaFactory<TSchema extends Document>
 
   createUpdateParams(): ZodType {
     const { tenantField, schema } = this.opts;
-    if (!schema || !(schema instanceof ZodObject)) {
+    if (!isZodSchema<ZodObject>(schema, 'object')) {
       throw new Error('Schema is not a ZodObject');
     }
 

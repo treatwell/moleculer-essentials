@@ -1,4 +1,4 @@
-import { z, ZodType } from 'zod/v4';
+import { z, type ZodType } from 'zod/v4';
 import { Ajv2019 as Ajv, ErrorObject, Options } from 'ajv/dist/2019.js';
 import {
   ActionHandler,
@@ -24,6 +24,7 @@ import {
 } from '../json-schema/index.js';
 import { getSchemaFromMoleculer } from './utils.js';
 import { ZodActionOrEventSchema, ZodValidator } from './zod-validator.js';
+import { isZodSchema } from '../zod/zod-helpers.js';
 
 type ActionOrEventValidatorSchema<Mode extends string> = {
   params?: ValidationSchema | ZodType;
@@ -121,7 +122,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
     params: unknown,
     schema: ValidationSchema | S,
   ): boolean | z.output<S> {
-    if (schema instanceof ZodType) {
+    if (isZodSchema(schema)) {
       if (!this.zodValidator) {
         throw new Error('No validator to handle zod schemas');
       }
@@ -244,7 +245,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
           return handler;
         }
 
-        if (schema instanceof ZodType) {
+        if (isZodSchema(schema)) {
           return zodMiddleware.localAction(
             handler,
             action as ZodActionOrEventSchema,
@@ -267,7 +268,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
           return handler;
         }
 
-        if (schema instanceof ZodType) {
+        if (isZodSchema(schema)) {
           return zodMiddleware.localEvent(
             handler,
             event as ZodActionOrEventSchema,
