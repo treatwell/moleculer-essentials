@@ -1,6 +1,6 @@
 import type { Document, InferIdType, ObjectId, WithoutId } from 'mongodb';
 import type { ActionVisibility } from 'moleculer';
-import { ZodObject, ZodType } from 'zod/v4';
+import type { ZodObject, ZodType } from 'zod/v4';
 import type { JSONSchemaType } from '../../json-schema/index.js';
 import type { ValidationSchema } from '../../validator/types.js';
 import type { ActionSchemaFactory } from './actions/shared.js';

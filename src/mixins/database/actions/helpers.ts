@@ -1,7 +1,8 @@
 import { type BaseValidator, Errors } from 'moleculer';
 import type { Filter, Document } from 'mongodb';
-import { ZodType } from 'zod/v4';
+import type { ZodType } from 'zod/v4';
 import type { ValidationSchema } from '../../../validator/types.js';
+import { isZodSchema } from '../../../zod/zod-helpers.js';
 
 export function parseStringifiedQuery<TSchema extends Document>(
   sQuery?: string,
@@ -30,7 +31,7 @@ export function parseAndValidateQuery<TSchema extends Document>(
   }
 
   let query = parseStringifiedQuery<TSchema>(sQuery);
-  if (schema instanceof ZodType) {
+  if (isZodSchema(schema)) {
     query = validator.validate(query, schema) as Filter<TSchema>;
   } else {
     validator.validate(query, schema);

@@ -1,7 +1,6 @@
 import type { Document, ObjectId } from 'mongodb';
 import type { Context, Service } from 'moleculer';
 import type { Readable } from 'stream';
-import { ZodType } from 'zod/v4';
 import { createOpenAPIResponses } from '../../../openapi/index.js';
 import type {
   DatabaseActionNames,
@@ -31,6 +30,7 @@ import { AjvActionSchemaFactory } from './ajv.js';
 import { parseAndValidateQuery } from './helpers.js';
 import { ActionSchemaFactory } from './shared.js';
 import { ZodActionSchemaFactory } from './zod.js';
+import { isZodSchema } from '../../../zod/zod-helpers.js';
 
 type DatabaseActionThis<
   TSchema extends Document & { _id: ObjectId | string },
@@ -77,7 +77,7 @@ export function createActions<
 
   const factory: ActionSchemaFactory =
     opts.actions?.schemaFactory ||
-    (opts.actions?.schema instanceof ZodType
+    (isZodSchema(opts.actions?.schema)
       ? new ZodActionSchemaFactory({
           schemaName: opts.actions.schemaName,
           schema: opts.actions.schema,

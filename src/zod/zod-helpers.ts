@@ -1,6 +1,6 @@
 import { ObjectId } from 'bson';
 import { parseISO } from 'date-fns';
-import { z, ZodType } from 'zod';
+import { z, type ZodType } from 'zod/v4';
 import type { SomeJSONSchema } from '../json-schema/index.js';
 import { OpenAPIExtractor } from '../openapi/index.js';
 import type { ReferenceObject, SchemaObject } from '../openapi/types.js';
@@ -143,4 +143,22 @@ export function zodCoerceArray<T extends ZodType>(
   return z
     .transform(val => (!Array.isArray(val) && val !== undefined ? [val] : val))
     .pipe(z.array(element, params));
+}
+
+function _isZodType(schema: unknown): schema is z.ZodType {
+  if (!schema || typeof schema !== 'object') {
+    return false;
+  }
+  // Light check for ZodSchema to let multiple version of Zod live in the project
+  return '_zod' in schema;
+}
+
+export function isZodSchema<S extends z.ZodType>(
+  schema: unknown,
+  type?: S['type'],
+): schema is S {
+  if (!_isZodType(schema)) {
+    return false;
+  }
+  return type ? schema.type === type : true;
 }
