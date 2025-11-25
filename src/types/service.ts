@@ -10,12 +10,11 @@ import type { ServiceEventSchema } from './events.js';
 /**
  * This type represent what is accessible from the `this` in a service file.
  */
-type ServiceThis<Settings, Methods, Mixins, AdditionalProperties> = {
+type ServiceThis<Settings, Methods, Mixins> = {
   // Disable this.actions calls as it isn't typed correctly
   actions: never;
   settings: Settings;
 } & Methods &
-  AdditionalProperties &
   Service &
   // @ts-expect-error TS is not able to find 'methods' in the mixins type
   UnionToIntersection<Unpacked<Mixins>>['methods'] &
@@ -24,8 +23,8 @@ type ServiceThis<Settings, Methods, Mixins, AdditionalProperties> = {
 /**
  * Type used for injecting `this` in an object.
  */
-type ObjectServiceThis<T, Settings, Methods, Mixins, AdditionalProperties> = T &
-  ThisType<ServiceThis<Settings, Methods, Mixins, AdditionalProperties>>;
+type ObjectServiceThis<T, Settings, Methods, Mixins> = T &
+  ThisType<ServiceThis<Settings, Methods, Mixins>>;
 
 /**
  * Type used for injecting `this` in a simple function.
@@ -35,19 +34,22 @@ type CallbackServiceThis<
   Settings,
   Methods,
   Mixins,
-  AdditionalProperties,
   Parameters extends unknown[] = [],
 > = (
-  this: ServiceThis<Settings, Methods, Mixins, AdditionalProperties>,
+  this: ServiceThis<Settings, Methods, Mixins>,
   ...params: Parameters
 ) => Return;
 
-export interface CustomServiceSchema<
-  Settings,
-  Methods,
-  Mixins,
-  AdditionalProperties,
-> {
+/**
+ * Export those internal helpers to allow consumers to add
+ * custom behavior
+ */
+export {
+  ObjectServiceThis as InternalObjectServiceThis,
+  CallbackServiceThis as InternalCallbackServiceThis,
+};
+
+export interface CustomServiceSchema<Settings, Methods, Mixins> {
   // Static fields
   name: string;
   version?: string | number;
@@ -59,55 +61,25 @@ export interface CustomServiceSchema<
   mixins?: Mixins;
 
   // Main Application logic
-  methods?: ObjectServiceThis<
-    Methods,
-    Settings,
-    Methods,
-    Mixins,
-    AdditionalProperties
-  >;
+  methods?: ObjectServiceThis<Methods, Settings, Methods, Mixins>;
   actions?: Record<
     string,
-    ObjectServiceThis<
-      CustomActionSchema,
-      Settings,
-      Methods,
-      Mixins,
-      AdditionalProperties
-    >
+    ObjectServiceThis<CustomActionSchema, Settings, Methods, Mixins>
   >;
   events?: Record<
     string,
-    ObjectServiceThis<
-      ServiceEventSchema,
-      Settings,
-      Methods,
-      Mixins,
-      AdditionalProperties
-    >
+    ObjectServiceThis<ServiceEventSchema, Settings, Methods, Mixins>
   >;
 
   // Lifecycle methods
   created?: OptionallyArray<
-    CallbackServiceThis<void, Settings, Methods, Mixins, AdditionalProperties>
+    CallbackServiceThis<void, Settings, Methods, Mixins>
   >;
   started?: OptionallyArray<
-    CallbackServiceThis<
-      Promise<void> | void,
-      Settings,
-      Methods,
-      Mixins,
-      AdditionalProperties
-    >
+    CallbackServiceThis<Promise<void> | void, Settings, Methods, Mixins>
   >;
   stopped?: OptionallyArray<
-    CallbackServiceThis<
-      Promise<void> | void,
-      Settings,
-      Methods,
-      Mixins,
-      AdditionalProperties
-    >
+    CallbackServiceThis<Promise<void> | void, Settings, Methods, Mixins>
   >;
   merged?: OptionallyArray<
     CallbackServiceThis<
@@ -115,8 +87,7 @@ export interface CustomServiceSchema<
       Settings,
       Methods,
       Mixins,
-      AdditionalProperties,
-      [CustomServiceSchema<Settings, Methods, Mixins, AdditionalProperties>]
+      [CustomServiceSchema<Settings, Methods, Mixins>]
     >
   >;
 }

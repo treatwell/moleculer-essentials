@@ -1,5 +1,9 @@
 import type { ServiceSchema } from 'moleculer';
-import type { CustomServiceSchema } from './service.js';
+import type {
+  CustomServiceSchema,
+  InternalObjectServiceThis,
+  InternalCallbackServiceThis,
+} from './service.js';
 import type { CustomActionSchema, Alias } from './actions.js';
 
 /**
@@ -16,10 +20,8 @@ import type { CustomActionSchema, Alias } from './actions.js';
  *
  * For now, only methods are typed.
  */
-export function wrapMixin<Settings, Methods, Mixins, AdditionalProperties>(
-  svc: Partial<
-    CustomServiceSchema<Settings, Methods, Mixins, AdditionalProperties>
-  >,
+export function wrapMixin<Settings, Methods, Mixins>(
+  svc: Partial<CustomServiceSchema<Settings, Methods, Mixins>>,
 ): typeof svc {
   return svc;
 }
@@ -32,10 +34,16 @@ export function wrapMixin<Settings, Methods, Mixins, AdditionalProperties>(
  * For the wrapService fn, it will return a moleculer ServiceSchema that will stripe
  * out every smart typing of methods. This should never be used inside a mixin.
  */
-export function wrapService<Settings, Methods, Mixins, AdditionalProperties>(
-  svc: CustomServiceSchema<Settings, Methods, Mixins, AdditionalProperties>,
+export function wrapService<Settings, Methods, Mixins>(
+  svc: CustomServiceSchema<Settings, Methods, Mixins>,
 ): ServiceSchema {
   return svc as ServiceSchema;
 }
 
-export type { Alias, CustomServiceSchema, CustomActionSchema };
+export type {
+  Alias,
+  CustomServiceSchema,
+  CustomActionSchema,
+  InternalObjectServiceThis,
+  InternalCallbackServiceThis,
+};

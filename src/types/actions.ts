@@ -36,12 +36,6 @@ export interface CustomActionSchema<T = unknown> {
   params?: unknown;
   disableTransforms?: boolean;
 
-  // Rate limiter related fields
-  rateLimiter?: string;
-  // Specify if it should consume both the custom rateLimiter
-  // AND the custom rateLimiter. By default, to `true`.
-  rateLimiterCountTowardDefault?: boolean;
-
   // OpenAPI related fields
   openAPINames?: string[] | null;
   openapi?: OperationObject;
