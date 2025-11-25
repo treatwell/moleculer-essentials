@@ -158,6 +158,127 @@ export default wrapService({
 
 The documentation isn't done yet, but you can check the [source code](./src/) to see what is available.
 
+### ServiceSchema & ActionSchema overriding
+
+By using TS declaration [merging feature](https://www.typescriptlang.org/docs/handbook/declaration-merging.html),
+you can augment the default services and action schemas to support additional features:
+
+```ts
+declare module '@treatwell/moleculer-essentials' {
+  export interface CustomActionSchema {
+    myCustomFeature?: number;
+  }
+}
+
+export default wrapService({
+  name: 'my-service',
+  actions: {
+    myAction: {
+      myCustomFeature: 'not_a_number', // TS2322: Type string is not assignable to type number
+    },
+  },
+});
+```
+
+#### Moleculer channels example
+
+For example, adding support for the [`@moleculer/channels`](https://github.com/moleculerjs/moleculer-channels) package
+can be achieved like this:
+
+```ts
+import { CustomActionSchema, InternalObjectServiceThis } from '@treatwell/moleculer-essentials';
+import { Context } from 'moleculer';
+
+declare module '@treatwell/moleculer-essentials' {
+  type DeadLetteringOptions = {
+    /**
+     * Enable dead-letter-queue
+     */
+    enabled: boolean;
+    /**
+     * Name of the dead-letter queue
+     */
+    queueName: string;
+    /**
+     * Name of the dead-letter exchange (only for AMQP adapter)
+     */
+    exchangeName: string;
+    /**
+     * Options for the dead-letter exchange (only for AMQP adapter)
+     */
+    exchangeOptions: unknown;
+    /**
+     * Options for the dead-letter queue (only for AMQP adapter)
+     */
+    queueOptions: unknown;
+  };
+
+  type MoleculerChannel = {
+    /**
+     * Channel/Queue/Stream name
+     * @default record name (with adapter prefix)
+     */
+    name?: string;
+    /**
+     * Consumer group
+     * @default Service name
+     */
+    group?: string;
+
+    /**
+     * Use moleculer context instead of direct payload.
+     * To have typing enabled, should always be true.
+     *
+     * @default uses Middleware `context` option (should be set to true)
+     */
+    context?: boolean;
+
+    /**
+     * Maximum number of messages that can be processed simultaneously
+     *
+     * @default adapter's maxInFlight
+     */
+    maxInFlight?: number | null;
+
+    /**
+     * Maximum number of retries before sending the message to dead-letter-queue.
+     *
+     * @default adapter's maxRetries (default: 3)
+     */
+    maxRetries?: number | null;
+
+    /**
+     * Dead-letter-queue options
+     *
+     * @default adapter's deadLettering (default: not enabled)
+     */
+    deadLettering?: DeadLetteringOptions | null;
+
+    /**
+     * Mandatory handler function (can be provided through mixins)
+     */
+    handler?: (ctx: Context<never, never>, raw: never) => Promise<unknown> | unknown;
+  };
+
+  export interface CustomServiceSchema<Settings, Methods, Mixins> {
+    channels?: Record<string, InternalObjectServiceThis<MoleculerChannel, Settings, Methods, Mixins>>;
+  }
+}
+
+
+export default wrapService({
+  name: 'my-service',
+  channels: {
+    'payment.processed': {
+      group: "other",
+      async handler(ctx: Context<{...}>) {
+        ctx.logger.info('Processing payment', ctx.params);
+      },
+    },
+  },
+});
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
