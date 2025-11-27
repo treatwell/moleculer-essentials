@@ -17,9 +17,9 @@ import {
   QueryOp,
 } from './shared.js';
 
-export class AjvActionSchemaFactory<TSchema extends Document>
-  implements ActionSchemaFactory<ValidationSchema>
-{
+export class AjvActionSchemaFactory<
+  TSchema extends Document,
+> implements ActionSchemaFactory<ValidationSchema> {
   private readonly tenantFieldType: ValidationSchema | undefined;
 
   private readonly _idFieldType: ValidationSchema | undefined;

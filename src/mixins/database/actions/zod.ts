@@ -17,9 +17,9 @@ import {
 
 const ScopeSchema = z.enum(['include-deleted', 'only-deleted', 'no-deleted']);
 
-export class ZodActionSchemaFactory<TSchema extends Document>
-  implements ActionSchemaFactory<ZodType>
-{
+export class ZodActionSchemaFactory<
+  TSchema extends Document,
+> implements ActionSchemaFactory<ZodType> {
   private readonly tenantFieldType: ZodType | undefined;
 
   private readonly _idFieldType: ZodType | undefined;
