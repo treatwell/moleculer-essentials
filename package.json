@@ -167,7 +167,7 @@
     "moleculer": "^0.14.35",
     "mongodb": "^6.21.0",
     "mongodb-memory-server": "^10.3.0",
-    "pkgroll": "^2.21.3",
+    "pkgroll": "2.20.1",
     "prettier": "^3.6.2",
     "redlock": "^4.2.0",
     "semantic-release": "^25.0.2",
