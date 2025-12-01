@@ -89,5 +89,4 @@ export * from './exporters/index.js';
 /**
  * TODO: List of things that still need to be added:
  *  - Errors
- *  - API Service
  */
