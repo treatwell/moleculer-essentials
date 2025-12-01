@@ -2664,7 +2664,7 @@ __metadata:
     ajv-formats: "npm:^2.1.1"
     ajv-keywords: "npm:^5.1.0"
     bson: "npm:^6.2.0"
-    bullmq: "npm:^5.59.0"
+    bullmq: "npm:^5.65.1"
     date-fns: "npm:^2.21.3"
     es-toolkit: "npm:^1.42.0"
     eslint: "npm:^9.39.1"
@@ -3820,9 +3820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bullmq@npm:^5.59.0":
-  version: 5.65.0
-  resolution: "bullmq@npm:5.65.0"
+"bullmq@npm:^5.65.1":
+  version: 5.65.1
+  resolution: "bullmq@npm:5.65.1"
   dependencies:
     cron-parser: "npm:^4.9.0"
     ioredis: "npm:^5.8.2"
@@ -3831,7 +3831,7 @@ __metadata:
     semver: "npm:^7.5.4"
     tslib: "npm:^2.0.0"
     uuid: "npm:^11.1.0"
-  checksum: 10c0/e564dd370578a11983228271fcb1a67e3e294f1d6138d3c530f79e646b5415d14d585ef1baffc02215fcf76495181abdafde6c816671279b6f1706786d132bb6
+  checksum: 10c0/bbe4843b22db4c6be42335c3ac5d906d09b09efc7e8a9e61913d04822ad4ea76ffbf56b1c0c81b898ee75e5d40f452f6cd71246ab283377e14ff76b3803cba32
   languageName: node
   linkType: hard
 
