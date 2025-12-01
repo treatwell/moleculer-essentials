@@ -2656,7 +2656,7 @@ __metadata:
     "@aws-crypto/client-node": "npm:^4.2.1"
     "@eslint/js": "npm:^9.39.1"
     "@treatwell/eslint-plugin-moleculer": "npm:^1.1.2"
-    "@tsconfig/node-lts": "npm:^22.0.4"
+    "@tsconfig/node-lts": "npm:^24.0.0"
     "@types/jsonwebtoken": "npm:^9.0.10"
     "@types/node": "npm:^24.10.1"
     "@types/redlock": "npm:^4.0.8"
@@ -2717,10 +2717,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@tsconfig/node-lts@npm:^22.0.4":
-  version: 22.0.4
-  resolution: "@tsconfig/node-lts@npm:22.0.4"
-  checksum: 10c0/f0c6bbcc08670d5401426924345b31e136ebb40ee7020e38156f4b4c202842a5b316e460714900741f6f00328ff36b15e7862f6bf703cf69003770f4fac85a0a
+"@tsconfig/node-lts@npm:^24.0.0":
+  version: 24.0.0
+  resolution: "@tsconfig/node-lts@npm:24.0.0"
+  checksum: 10c0/63f5e2c576d4beb19e92ce32b22b132b013b66327137d7c54ee15f9b19812e2ed81bcc5d16ce32450ac7114e774d57100cabd4442571827ed50bfba58aaded0e
   languageName: node
   linkType: hard
 
