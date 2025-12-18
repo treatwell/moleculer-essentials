@@ -1,5 +1,5 @@
 import { Redis, type RedisOptions } from 'ioredis';
-import { parseURL } from 'ioredis/built/utils';
+import { parseURL } from 'ioredis/built/utils/index.js';
 
 export function createRedisConnection(url: string): Redis {
   let tls: RedisOptions['tls'];
