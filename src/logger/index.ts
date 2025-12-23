@@ -1,135 +1,112 @@
-import { type Logger, type TransportSingleOptions, pino } from 'pino';
+import { pino, type Logger, type LoggerOptions } from 'pino';
 import { hostname } from 'node:os';
 import type { LoggerBindings, LoggerConfig } from 'moleculer';
+import { CreateLoggerOptions, MoleculerLoggerConfigOptions } from './types.js';
+import { createPinoPrettyTransport } from './pino-pretty-transport-config.js';
+import { pinoLogMethod, wrapLogMethodWithFilter } from './log-method.js';
 
-const FILTER_SERVICE_LOGS_REGEX =
-  /('[^']*' service is registered\.)|(Service '[^']*' started\.)|('[^']*' finished starting\.)/;
+const DEFAULT_REDACT_PATHS = [
+  // Request headers
+  'req.headers.authorization',
+  'req.headers["device-useragent"]',
+  'req.headers.connection',
+  'req.headers["content-type"]',
+  'req.headers["accept"]',
+  'req.headers["keep-alive"]',
+  'req.headers["dnt"]',
+  'req.headers["accept-encoding"]',
+  'req.headers["accept-language"]',
+  'req.headers["sec-fetch-site"]',
+  'req.headers["sec-fetch-mode"]',
+  'req.headers["sec-fetch-dest"]',
+  'req.headers["sec-fetch-user"]',
+  'req.headers["sec-ch-ua"]',
+  'req.headers["sec-ch-ua-mobile"]',
+  'req.headers["upgrade-insecure-requests"]',
+  'req.headers["if-none-match"]',
+  'req.headers["cookie"]',
+  'req.headers.referer',
+  // Response headers
+  'res.headers.allow',
+  'res.headers.vary',
+  'res.headers["x-powered-by"]',
+  'res.headers["access-control-allow-origin"]',
+  'res.headers["content-type"]',
+  'res.headers["content-encoding"]',
+];
 
-let transport: TransportSingleOptions | undefined;
-if (process.env.NODE_ENV !== 'production') {
-  transport = {
-    // Building with pkgroll (rollup) will bundle the file into the root index.js so we keep
-    // `logger/` in the path.
-    target: './logger/pino-pretty-transport.cjs',
-    options: {
-      colorize: true,
-      singleLine: true,
-      ignore: [
-        'hostname',
-        // Hide req and res in logs as it will be included in the pretty message
-        // or is not useful in development
-        'req',
-        'res',
-        'responseTime',
-        'span\\.id',
-      ].join(','),
-    },
+/**
+ * Create a Pino logger with multiple customization by default (can be overridden):
+ * - A more open `logMethod` function that allows mixed string/object arguments
+ * - Add hostname as base prop
+ * - Enable pino-pretty on TTY terminals (with some basic http support)
+ * - Some default redaction of paths related to req&res props
+ */
+export function createLogger(opts: CreateLoggerOptions = {}): Logger {
+  const { prettyOptions, filter, ...pinoOpts } = opts;
+
+  let transport: LoggerOptions['transport'] = undefined;
+  if ('transport' in opts) {
+    transport = opts.transport;
+  } else if (prettyOptions?.enabled ?? process.stdout.isTTY) {
+    transport = createPinoPrettyTransport(prettyOptions);
+  }
+
+  const redact: LoggerOptions['redact'] = {
+    paths: DEFAULT_REDACT_PATHS,
+    remove: true,
   };
+  if (Array.isArray(opts.redact)) {
+    redact.paths = opts.redact;
+  } else if (opts.redact) {
+    Object.assign(redact, opts.redact);
+  }
+
+  return pino({
+    ...pinoOpts,
+    transport,
+    base: { hostname: hostname(), ...pinoOpts.base },
+    hooks: {
+      logMethod: filter
+        ? wrapLogMethodWithFilter(pinoLogMethod, filter)
+        : pinoLogMethod,
+      ...pinoOpts.hooks,
+    },
+    redact,
+  });
 }
 
-const logger = pino({
-  base: {
-    hostname: hostname(),
-    // Need to set this to allow logs in context of traces
-    // Note that this will not work with dotenv loaded environment variables.
-    'service.name': process.env.NEWRELIC_APP_NAME,
-  },
-  transport,
-  hooks: {
-    /**
-     * This function allow logs like `logger.info('str 1', {a: 1}, 'str 2', ...)` to
-     * be formatted correctly (every string are concatenated into one and objects are merged in the log).
-     */
-    logMethod(args: (string | Error | object)[], method) {
-      const mergingObject: Record<string, unknown> = {};
-      let msg = '';
+/**
+ * Create moleculer logger config.
+ * This returns a Pino config with a couple of customization:
+ * - Trace ID and Span ID is automatically added to the ctx.logger (only with this package's ContextFactory)
+ */
+export function createLoggerConfig(
+  opts: MoleculerLoggerConfigOptions = {},
+): LoggerConfig {
+  const {
+    traceIdField = 'trace.id',
+    spanIdField = 'span.id',
+    logger = createLogger(),
+  } = opts;
 
-      for (const arg of args) {
-        if (arg instanceof Error) {
-          mergingObject.err = arg;
-        } else if (typeof arg === 'string') {
-          msg += (msg ? ' ' : '') + arg;
-        } else if (arg && 'msg' in arg && typeof arg.msg === 'string') {
-          msg += (msg ? ' ' : '') + arg.msg;
-          Object.assign(mergingObject, arg);
-        } else {
-          Object.assign(mergingObject, arg);
-        }
-      }
-
-      if (
-        process.env.FILTER_SERVICE_LOGS === 'yes' &&
-        FILTER_SERVICE_LOGS_REGEX.test(msg)
-      ) {
-        return undefined;
-      }
-
-      mergingObject.msg = msg;
-      // @ts-expect-error TS only allow one of the 3 method signatures (msg: string, ...args: any[])
-      return method.apply(this, [mergingObject]);
-    },
-  },
-  redact: {
-    paths: [
-      // Request headers
-      'req.headers.authorization',
-      'req.headers["device-useragent"]',
-      'req.headers.connection',
-      'req.headers["content-type"]',
-      'req.headers["accept"]',
-      'req.headers["keep-alive"]',
-      'req.headers["dnt"]',
-      'req.headers["accept-encoding"]',
-      'req.headers["accept-language"]',
-      'req.headers["sec-fetch-site"]',
-      'req.headers["sec-fetch-mode"]',
-      'req.headers["sec-fetch-dest"]',
-      'req.headers["sec-fetch-user"]',
-      'req.headers["sec-ch-ua"]',
-      'req.headers["sec-ch-ua-mobile"]',
-      'req.headers["upgrade-insecure-requests"]',
-      'req.headers["if-none-match"]',
-      'req.headers["cookie"]',
-      'req.headers.referer',
-      // Response headers
-      'res.headers.allow',
-      'res.headers.vary',
-      'res.headers["x-powered-by"]',
-      'res.headers["access-control-allow-origin"]',
-      'res.headers["content-type"]',
-      'res.headers["content-encoding"]',
-    ],
-    remove: true,
-  },
-});
-
-export const createLogger = (bindings: Record<string, unknown>): Logger =>
-  logger.child(bindings);
-
-export function createLoggerConfig(): LoggerConfig {
   return {
     type: 'Pino',
     options: {
       createLogger: (
         level: string,
         bindings: LoggerBindings & Record<string, unknown>,
-      ) =>
-        createLogger({
-          label: bindings.mod,
-          'trace.id': bindings.traceID,
-          'span.id': bindings.spanID,
-        }),
+      ) => {
+        const childBindings: Record<string, unknown> = { label: bindings.mod };
+        if (traceIdField !== false) {
+          childBindings[traceIdField] = bindings.traceID;
+        }
+        if (spanIdField !== false) {
+          childBindings[spanIdField] = bindings.spanID;
+        }
+
+        return logger.child(childBindings, { level });
+      },
     },
   };
-}
-
-export const defaultLogger = createLogger({ label: 'default' });
-
-/**
- * Augment pino to something closer to what Moleculer is using.
- */
-declare module 'pino' {
-  interface LogFn {
-    (msg: string, ...args: (Error | object)[]): void;
-  }
 }

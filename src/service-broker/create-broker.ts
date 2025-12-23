@@ -5,10 +5,11 @@ import { ZodValidator } from '../validator/zod-validator.js';
 import { ServiceFactory } from './service-factory.js';
 import { ContextFactory } from './context-factory.js';
 import { CustomServiceBroker } from './service-broker.js';
+import { createLoggerConfig } from '../logger/index.js';
 
 export function createServiceBroker(opts: BrokerOptions = {}): ServiceBroker {
   return new CustomServiceBroker({
-    logger: process.env.NODE_ENV === 'test' ? false : undefined, // TODO Add default logger
+    logger: process.env.NODE_ENV === 'test' ? false : createLoggerConfig(),
     validator: new AjvValidator(
       {
         default: {
