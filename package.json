@@ -109,8 +109,8 @@
     "bson": "^6.2.0",
     "date-fns": "^2.21.3",
     "es-toolkit": "^1.42.0",
-    "pino": "^9.14.0",
-    "pino-pretty": "^13.1.2"
+    "pino": "^10.1.0",
+    "pino-pretty": "^13.1.3"
   },
   "peerDependencies": {
     "@aws-crypto/client-node": "^4.2.1",
@@ -148,33 +148,33 @@
   },
   "devDependencies": {
     "@aws-crypto/client-node": "^4.2.1",
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^9.39.2",
     "@treatwell/eslint-plugin-moleculer": "^1.1.2",
-    "@tsconfig/node-lts": "^22.0.4",
+    "@tsconfig/node-lts": "^24.0.0",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.4",
     "@types/redlock": "^4.0.8",
-    "bullmq": "^5.59.0",
-    "eslint": "^9.39.1",
+    "bullmq": "^5.66.3",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
     "ioredis": "^5.8.2",
     "jiti": "^2.6.1",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^9.0.3",
     "jwks-rsa": "^3.2.0",
     "moleculer": "^0.14.35",
     "mongodb": "^6.21.0",
-    "mongodb-memory-server": "^10.3.0",
+    "mongodb-memory-server": "^11.0.1",
     "pkgroll": "2.20.1",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.4",
     "redlock": "^4.2.0",
     "semantic-release": "^25.0.2",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.0",
-    "vitest": "^4.0.13",
-    "zod": "^4.1.13"
+    "typescript-eslint": "^8.50.1",
+    "vitest": "^4.0.16",
+    "zod": "^4.2.1"
   },
   "files": [
     "dist"
@@ -182,5 +182,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.12.0"
 }
