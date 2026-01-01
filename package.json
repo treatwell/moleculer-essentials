@@ -110,7 +110,7 @@
     "date-fns": "^2.21.3",
     "es-toolkit": "^1.42.0",
     "pino": "^9.14.0",
-    "pino-pretty": "^13.1.2"
+    "pino-pretty": "^13.1.3"
   },
   "peerDependencies": {
     "@aws-crypto/client-node": "^4.2.1",
