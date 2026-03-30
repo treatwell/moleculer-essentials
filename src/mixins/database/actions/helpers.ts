@@ -11,7 +11,7 @@ export function parseStringifiedQuery<TSchema extends Document>(
     return {};
   }
 
-  let query = {};
+  let query;
   try {
     query = JSON.parse(sQuery || '{}');
   } catch {
