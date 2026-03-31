@@ -1,4 +1,7 @@
-import type { Context, ServiceSchema } from 'moleculer';
+// To prevent TS2742 for this mixin, we force import of Errors type here.
+// More: https://github.com/microsoft/TypeScript/pull/58176#issuecomment-2052698294
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { Context, ServiceSchema, Errors } from 'moleculer';
 import type { Alias, CustomActionSchema } from '../types/actions.js';
 import { generateOpenAPISpec } from './generate-doc.js';
 import {
