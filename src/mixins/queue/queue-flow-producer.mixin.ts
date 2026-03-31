@@ -15,7 +15,7 @@ export function QueueFlowProducerMixin(
   return wrapMixin({
     methods: {
       getFlowProducer(): FlowProducer {
-        return this.$flowProducer;
+        return this.$flowProducer as FlowProducer;
       },
     },
     async started() {
@@ -34,7 +34,7 @@ export function QueueFlowProducerMixin(
       this[kConnection] = connection;
     },
     async stopped() {
-      await this.$flowProducer?.close();
+      await this.getFlowProducer()?.close();
       (this[kConnection] as Redis | undefined)?.disconnect();
     },
   });

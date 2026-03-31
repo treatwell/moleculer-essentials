@@ -16,6 +16,9 @@
 - [License](#license)
 <!-- TOC -->
 
+> [!WARNING]
+> Starting v2.0.0-beta.4, this package is only compatible with moleculer v0.15+
+
 ## Purpose
 
 `@treatwell/moleculer-essentials` is a collection of essential utilities and helpers for building

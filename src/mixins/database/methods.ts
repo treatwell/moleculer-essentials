@@ -271,6 +271,7 @@ export function DatabaseMethodsMixin<
       _getDatabaseMixinCollection(
         options?: CollectionOptions,
       ): Collection<TSchema> {
+        // @ts-expect-error We expect the DatabaseConnectionMixin to be included
         return this.getCollection(options);
       },
 

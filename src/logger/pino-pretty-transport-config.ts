@@ -1,5 +1,5 @@
 import type { TransportSingleOptions } from 'pino';
-import { CreateLoggerOptions } from './types.js';
+import type { CreateLoggerOptions } from './types.js';
 
 /**
  * Create a pino transport to a pino-pretty wrapper with basic HTTP support.

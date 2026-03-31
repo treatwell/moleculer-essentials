@@ -52,7 +52,7 @@ export function QueueWorker(
     },
     methods: {
       getWorker(): Worker {
-        return this.$worker;
+        return this.$worker as Worker;
       },
 
       async processJob(job: Job, token?: string) {
@@ -150,7 +150,7 @@ export function QueueWorker(
     },
 
     async stopped() {
-      await this.$worker?.close();
+      await this.getWorker()?.close();
       (this[kConnection] as Redis | undefined)?.disconnect();
     },
   });

@@ -127,7 +127,10 @@ export function OpenAPIMixin(options: OpenAPIMixinOptions) {
             withActionSchema: true,
           }),
           ctx.call<
-            ServiceSchema[],
+            ServiceSchema<{
+              openapi?: Record<string, unknown>;
+              openAPINames?: string[] | null;
+            }>[],
             { onlyAvailable?: boolean; skipInternal?: boolean }
           >('$node.services', { onlyAvailable: true, skipInternal: true }),
         ]);

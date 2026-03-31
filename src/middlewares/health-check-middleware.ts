@@ -77,7 +77,7 @@ export function HealthCheckMiddleware(
     },
 
     // After broker started
-    started() {
+    async started() {
       // When moleculer is started, the API gateway may not be fully ready because
       // the API GW must regenerate its endpoints with the latest version of actions.
       // There is a debounce of 500ms on the API GW to not regenerate every time a service changed.
@@ -90,12 +90,12 @@ export function HealthCheckMiddleware(
     },
 
     // Before broker stopping
-    stopping() {
+    async stopping() {
       state = 'stopping';
     },
 
     // After broker stopped
-    stopped() {
+    async stopped() {
       state = 'down';
       server.close();
     },

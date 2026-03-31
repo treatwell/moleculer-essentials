@@ -1,14 +1,10 @@
 import { z, type ZodType } from 'zod/v4';
-import { Ajv2019 as Ajv, ErrorObject, Options } from 'ajv/dist/2019.js';
 import {
-  ActionHandler,
-  ActionSchema,
-  Context,
-  Errors,
-  ServiceBroker,
-  ServiceEventHandler,
-  Validators,
-} from 'moleculer';
+  Ajv2019 as Ajv,
+  type ErrorObject,
+  type Options,
+} from 'ajv/dist/2019.js';
+import { type Context, Errors, type Middleware, Validators } from 'moleculer';
 import addFormats from 'ajv-formats';
 import addKeywords from 'ajv-keywords';
 import {
@@ -22,8 +18,8 @@ import {
   COERCE_ARRAY_ATTRIBUTE,
   SCHEMA_REF_NAME,
 } from '../json-schema/index.js';
-import { getSchemaFromMoleculer } from './utils.js';
-import { ZodActionOrEventSchema, ZodValidator } from './zod-validator.js';
+import { getContextSchemaField, getSchemaFromMoleculer } from './utils.js';
+import { type ZodActionOrEventSchema, ZodValidator } from './zod-validator.js';
 import { isZodSchema } from '../zod/zod-helpers.js';
 
 type ActionOrEventValidatorSchema<Mode extends string> = {
@@ -31,14 +27,7 @@ type ActionOrEventValidatorSchema<Mode extends string> = {
   validatorMode?: Mode;
 };
 
-type ValidatorFixedMiddleware = {
-  name: string;
-  localAction: (handler: ActionHandler, action: ZodActionOrEventSchema) => void;
-  localEvent: (
-    handler: ServiceEventHandler,
-    event: ZodActionOrEventSchema,
-  ) => void;
-};
+type AjvValidatorCheckFnOption = { meta: { ctx: Context } };
 
 /**
  * Moleculer validator using Ajv/zod for schema validation.
@@ -59,9 +48,6 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
 
   private readonly defaultMode: Mode;
 
-  // broker is a property of the base class
-  private readonly broker!: ServiceBroker;
-
   public readonly zodValidator?: ZodValidator;
 
   /**
@@ -70,7 +56,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
    */
   private compiledFns: WeakMap<
     ValidationSchema,
-    (params: unknown, ctx?: Context) => boolean
+    (params: unknown, opts?: AjvValidatorCheckFnOption) => boolean
   > = new WeakMap();
 
   constructor(
@@ -78,7 +64,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
     defaultMode: Mode,
     zodValidator?: ZodValidator,
   ) {
-    super();
+    super({});
 
     this.defaultMode = defaultMode;
     this.zodValidator = zodValidator;
@@ -161,8 +147,11 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
     const { validator, extractor } = validatorMode;
     const refSchema = extractor.extract(schema);
 
-    const fn = (params: unknown, ctx?: Context) => {
-      if (!ctx?.action?.disableTransforms) {
+    const fn = (params: unknown, opts?: { meta: { ctx: Context } }) => {
+      const ctx = opts?.meta.ctx;
+      const disableTransforms = getContextSchemaField(ctx, 'disableTransforms');
+
+      if (!disableTransforms) {
         applyBeforeTransforms(schema, params as Record<string, unknown>);
       }
       // AJV use cache for compilation so no perf hit here.
@@ -180,7 +169,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
           validate.errors || [],
         );
       }
-      if (!ctx?.action?.disableTransforms) {
+      if (!disableTransforms) {
         applyAfterTransforms(schema, params as Record<string, unknown>);
       }
       return true;
@@ -219,9 +208,8 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
    * We wrap the localAction and localEvent methods to add validation to the actions and events handlers.
    * Note that we lazy compile schemas in order to avoid a performance hit on startup.
    */
-  middleware() {
-    let zodMiddleware =
-      this.zodValidator?.middleware() as unknown as ValidatorFixedMiddleware;
+  middleware(): Middleware {
+    let zodMiddleware = this.zodValidator?.middleware();
     if (!zodMiddleware) {
       zodMiddleware = {
         name: 'Validator',
@@ -236,10 +224,7 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
 
     return {
       name: 'Validator',
-      localAction: (
-        handler: ActionHandler,
-        action: ActionOrEventValidatorSchema<Mode>,
-      ) => {
+      localAction: (handler, action: ActionOrEventValidatorSchema<Mode>) => {
         const schema = getSchemaFromMoleculer(action.params);
         if (!schema) {
           return handler;
@@ -255,14 +240,12 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
         const validate = this.compile(schema, action.validatorMode);
         return async (ctx: Context) => {
           // Will throw if validation fails
-          validate(ctx.params != null ? ctx.params : {}, ctx);
+          validate(ctx.params != null ? ctx.params : {}, { meta: { ctx } });
+          // @ts-expect-error Moleculer binds this handler to the service but is done internally
           return handler(ctx);
         };
       },
-      localEvent: (
-        handler: ServiceEventHandler,
-        event: ActionOrEventValidatorSchema<Mode>,
-      ) => {
+      localEvent: (handler, event: ActionOrEventValidatorSchema<Mode>) => {
         const schema = getSchemaFromMoleculer(event.params);
         if (!schema) {
           return handler;
@@ -278,16 +261,24 @@ export class AjvValidator<Mode extends string> extends Validators.Base {
         const validate = this.compile(schema, event.validatorMode);
         return async (ctx: Context) => {
           // Will throw if validation fails
-          validate(ctx.params != null ? ctx.params : {}, ctx);
+          validate(ctx.params != null ? ctx.params : {}, { meta: { ctx } });
           return handler(ctx);
         };
       },
-    } as unknown as (handler: ActionHandler, action: ActionSchema) => unknown;
+    };
+  }
+
+  override convertSchemaToMoleculer(): Record<string, unknown> {
+    throw new Error('Not implemented');
   }
 }
 
 declare module 'moleculer' {
-  interface BaseValidator {
-    validate(params: unknown, schema: ValidationSchema): true;
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Validators {
+    export interface Base {
+      // @ts-expect-error TS2512 validate is abstract but can't be defined on interfaces
+      validate(params: unknown, schema: ValidationSchema): true;
+    }
   }
 }

@@ -1,3 +1,3 @@
-import type { ServiceEvent } from 'moleculer';
+import type { EventSchema } from 'moleculer';
 
-export type ServiceEventSchema = ServiceEvent & { params?: unknown };
+export type ServiceEventSchema = EventSchema & { params?: unknown };

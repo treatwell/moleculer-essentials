@@ -1,4 +1,4 @@
-import type { ServiceDependency, ServiceHooks, Service } from 'moleculer';
+import type { ServiceHooks, Service } from 'moleculer';
 import type { CustomActionSchema } from './actions.js';
 import type {
   OptionallyArray,
@@ -53,7 +53,7 @@ export interface CustomServiceSchema<Settings, Methods, Mixins> {
   // Static fields
   name: string;
   version?: string | number;
-  dependencies?: OptionallyArray<string | ServiceDependency>;
+  dependencies?: OptionallyArray<string | Service.ServiceDependency>;
   metadata?: Record<string, unknown>;
   settings?: Settings;
   hooks?: ServiceHooks;

@@ -1,9 +1,21 @@
 import { pino, type Logger, type LoggerOptions } from 'pino';
 import { hostname } from 'node:os';
-import type { LoggerBindings, LoggerConfig } from 'moleculer';
-import { CreateLoggerOptions, MoleculerLoggerConfigOptions } from './types.js';
+import type { LoggerConfig } from 'moleculer';
+import type {
+  CreateLoggerOptions,
+  MoleculerLoggerConfigOptions,
+} from './types.js';
 import { createPinoPrettyTransport } from './pino-pretty-transport-config.js';
 import { pinoLogMethod, wrapLogMethodWithFilter } from './log-method.js';
+
+// Copied from moleculer as v0.15 doesn't export it
+type LoggerBindings = {
+  nodeID: string;
+  ns: string;
+  mod: string;
+  svc?: string;
+  ver?: string;
+};
 
 const DEFAULT_REDACT_PATHS = [
   // Request headers

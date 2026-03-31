@@ -1,6 +1,6 @@
 import { defaultsDeep } from 'es-toolkit/compat';
 import {
-  type LoggerInstance,
+  type Logger,
   type Span,
   type Tracer,
   TracerExporters,
@@ -8,7 +8,7 @@ import {
 import { flattenTags } from './utils.js';
 
 export type NewrelicTraceExporterOptions = {
-  logger?: LoggerInstance;
+  logger?: Logger;
   safetyTags?: boolean;
 
   /**
@@ -34,7 +34,9 @@ export type NewrelicTraceExporterOptions = {
   /**
    * Default span tags.
    */
-  defaultTags?: Record<string, unknown> | (() => Record<string, unknown>);
+  defaultTags?:
+    | Record<string, unknown>
+    | ((tracer?: unknown) => Record<string, unknown>);
 };
 
 /**
@@ -46,11 +48,13 @@ export type NewrelicTraceExporterOptions = {
  * API v2: https://zipkin.io/zipkin-api/#/
  */
 export class NewrelicTraceExporter extends TracerExporters.Base {
+  private readonly opts: NewrelicTraceExporterOptions = {};
+
   private queue: Span[];
 
   private timer: NodeJS.Timeout | null = null;
 
-  private defaultTags: Record<string, unknown> = {};
+  private defaultTags: Record<string, unknown> | null = {};
 
   constructor(opts: NewrelicTraceExporterOptions) {
     super(opts);
@@ -73,15 +77,15 @@ export class NewrelicTraceExporter extends TracerExporters.Base {
   init(tracer: Tracer): void {
     super.init(tracer);
 
-    if (this.opts.interval > 0) {
+    if (this.opts.interval && this.opts.interval > 0) {
       this.timer = setInterval(() => this.flush(), this.opts.interval * 1000);
       this.timer.unref();
     }
 
     this.defaultTags =
-      typeof this.opts.defaultTags === 'function'
+      (typeof this.opts.defaultTags === 'function'
         ? this.opts.defaultTags.call(this, tracer)
-        : this.opts.defaultTags;
+        : this.opts.defaultTags) || null;
     if (this.defaultTags) {
       this.defaultTags = flattenTags(this.defaultTags, true);
     }
@@ -103,7 +107,7 @@ export class NewrelicTraceExporter extends TracerExporters.Base {
   spanFinished(span: Span): void {
     this.queue.push(span);
 
-    if (this.queue.length >= this.opts.batchSize) {
+    if (this.queue.length >= this.opts.batchSize!) {
       this.flush();
     }
   }
@@ -175,7 +179,6 @@ export class NewrelicTraceExporter extends TracerExporters.Base {
         'duration.ms': span.duration,
         name: span.name,
         'parent.id': span.parentID,
-        // @ts-expect-error fullName isn't declared on span yet
         'service.name': span.service?.fullName || null,
         ...flattenTags(span.tags, true),
         ...(flattenTags(this.errorToObject(span.error!), true, 'error') || {}),

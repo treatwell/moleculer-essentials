@@ -22,7 +22,7 @@ export function RedisMixin(
     mixins: [GlobalStoreMixin<Redis>()],
     methods: {
       getRedis(): Redis {
-        return this.redis;
+        return this.redis as Redis;
       },
     },
 
@@ -50,8 +50,8 @@ export function RedisMixin(
           ...finalOptions,
           lazyConnect: true,
         });
-        this.setClientToStore('redis', key, this.redis, () =>
-          this.redis?.disconnect(),
+        this.setClientToStore('redis', key, this.getRedis(), () =>
+          this.getRedis()?.disconnect(),
         );
       }
     },

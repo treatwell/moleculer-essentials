@@ -1,3 +1,5 @@
+import type { Context } from 'moleculer';
+
 export function getSchemaFromMoleculer<T>(schema: T): undefined | T {
   if (!schema) {
     return undefined;
@@ -13,4 +15,22 @@ export function getSchemaFromMoleculer<T>(schema: T): undefined | T {
     }
   }
   return undefined;
+}
+
+/**
+ * Will check for action or event's schema prop and return it.
+ * Return undefined if no action or event is linked to ctx.
+ */
+export function getContextSchemaField(
+  ctx: Context | undefined,
+  prop: string,
+): unknown {
+  if (!ctx) {
+    return;
+  }
+  const schema = ctx.action ?? ctx.event;
+  if (!schema) {
+    return;
+  }
+  return (schema as Record<string, unknown>)[prop];
 }

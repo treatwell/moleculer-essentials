@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ObjectId } from 'bson';
-import { BaseValidator } from 'moleculer';
+import { Validators } from 'moleculer';
 import { z } from 'zod/v4';
 import {
   COERCE_ARRAY_ATTRIBUTE,
@@ -47,7 +47,7 @@ describe('validator zod fallback', () => {
   });
 
   it('should correctly type validate fn as BaseValidator', () => {
-    const validator = createValidator() as BaseValidator;
+    const validator = createValidator() as Validators.Base;
 
     const schema: JSONSchemaType<{ a: ObjectId }> = {
       type: 'object',

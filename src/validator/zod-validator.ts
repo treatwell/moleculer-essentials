@@ -1,11 +1,4 @@
-import {
-  type ActionHandler,
-  type Context,
-  Errors,
-  Validators,
-  type ServiceEventHandler,
-  type ActionSchema,
-} from 'moleculer';
+import { type Context, Errors, Validators } from 'moleculer';
 import { z, type ZodType } from 'zod/v4';
 import { getSchemaFromMoleculer } from './utils.js';
 
@@ -18,7 +11,11 @@ export type ZodActionOrEventSchema = { params?: ZodType };
  * Transforms MUST BE handled by the consumer directly.
  */
 export class ZodValidator extends Validators.Base {
-  override compile(): () => void {
+  constructor() {
+    super({});
+  }
+
+  override compile(): Validators.Base.CheckerFunction {
     throw new Error('compile should not be used, use validate instead');
   }
 
@@ -46,7 +43,8 @@ export class ZodValidator extends Validators.Base {
   override middleware() {
     return {
       name: 'Validator',
-      localAction: (handler: ActionHandler, action: ZodActionOrEventSchema) => {
+      // @ts-expect-error Moleculer wants action.params to be an object
+      localAction: (handler, action: ZodActionOrEventSchema) => {
         const schema = getSchemaFromMoleculer(action.params);
         if (!schema) {
           return handler;
@@ -57,10 +55,8 @@ export class ZodValidator extends Validators.Base {
           return handler(ctx);
         };
       },
-      localEvent: (
-        handler: ServiceEventHandler,
-        event: ZodActionOrEventSchema,
-      ) => {
+      // @ts-expect-error Moleculer wants action.params to be an object
+      localEvent: (handler, event: ZodActionOrEventSchema) => {
         const schema = getSchemaFromMoleculer(event.params);
         if (!schema) {
           return handler;
@@ -71,12 +67,20 @@ export class ZodValidator extends Validators.Base {
           return handler(ctx);
         };
       },
-    } as unknown as (handler: ActionHandler, action: ActionSchema) => unknown;
+    };
+  }
+
+  override convertSchemaToMoleculer(): Record<string, unknown> {
+    throw new Error('Not implemented');
   }
 }
 
 declare module 'moleculer' {
-  interface BaseValidator {
-    validate<S extends ZodType>(params: unknown, schema: S): z.output<S>;
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Validators {
+    export interface Base {
+      // @ts-expect-error TS2512 validate is abstract but can't be defined on interfaces
+      validate<S extends ZodType>(params: unknown, schema: S): z.output<S>;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { type BaseValidator, Errors } from 'moleculer';
+import { type Validators, Errors } from 'moleculer';
 import type { Filter, Document } from 'mongodb';
 import type { ZodType } from 'zod/v4';
 import type { ValidationSchema } from '../../../validator/types.js';
@@ -22,7 +22,7 @@ export function parseStringifiedQuery<TSchema extends Document>(
 }
 
 export function parseAndValidateQuery<TSchema extends Document>(
-  validator: BaseValidator,
+  validator: Validators.Base,
   schema: ValidationSchema | ZodType | undefined,
   sQuery: string | undefined,
 ): Filter<TSchema> {

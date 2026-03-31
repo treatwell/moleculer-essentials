@@ -1,4 +1,4 @@
-import Moleculer, { ServiceBroker } from 'moleculer';
+import { ServiceBroker, type Logger } from 'moleculer';
 
 /**
  * LoggerFactory only call get and set method.
@@ -19,10 +19,8 @@ export class CustomServiceBroker extends ServiceBroker {
    * This is because caching loggers can lead to OOM because of
    * the large number of child loggers created (one per span).
    */
-  override getLogger(
-    module: string,
-    props?: Moleculer.GenericObject,
-  ): Moleculer.LoggerInstance {
+  override getLogger(module: string, props?: Record<string, unknown>): Logger {
+    // @ts-expect-error loggerFactory exists but isn't typed yet
     this.loggerFactory.cache = NOOP_CACHE;
     return super.getLogger(module, props);
   }
