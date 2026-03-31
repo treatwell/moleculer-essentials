@@ -1,11 +1,8 @@
 import { defaultsDeep } from 'es-toolkit/compat';
 import {
   MetricReporters,
+  type MetricTypes,
   type MetricRegistry,
-  type LoggerInstance,
-  type GaugeMetricSnapshot,
-  type HistogramMetricSnapshot,
-  type MetricReporterOptions,
 } from 'moleculer';
 import { flattenTags } from './utils.js';
 
@@ -34,7 +31,7 @@ type DefaultTags =
   | Record<string, unknown>
   | ((registry: MetricRegistry) => Record<string, unknown>);
 
-type NewrelicMetricsOptions = MetricReporterOptions & {
+type NewrelicMetricsOptions = MetricReporters.Base.MetricReporterOptions & {
   /**
    * Base URL for NewRelic server.
    */
@@ -62,14 +59,11 @@ type NewrelicMetricsOptions = MetricReporterOptions & {
  * NewRelic API: https://docs.newrelic.com/docs/data-apis/understand-data/metric-data/metric-data-type/
  */
 export class NewrelicMetricsReporter extends MetricReporters.Base {
-  // Those fields are not declared on the Base class.
-  public registry!: MetricRegistry;
-
-  public logger!: LoggerInstance;
+  private readonly opts: NewrelicMetricsOptions = {};
 
   private timer: NodeJS.Timeout | null = null;
 
-  private defaultTags: DefaultTags = {};
+  private defaultTags: DefaultTags | null = {};
 
   constructor(opts: NewrelicMetricsOptions) {
     super(opts);
@@ -89,7 +83,7 @@ export class NewrelicMetricsReporter extends MetricReporters.Base {
   init(registry: MetricRegistry): void {
     super.init(registry);
 
-    if (this.opts.interval > 0) {
+    if (this.opts.interval && this.opts.interval > 0) {
       this.timer = setInterval(() => this.flush(), this.opts.interval * 1000);
       this.timer.unref();
     }
@@ -178,7 +172,8 @@ export class NewrelicMetricsReporter extends MetricReporters.Base {
         case 'counter':
         case 'gauge':
           snapshot.forEach(item => {
-            const { value, timestamp, labels } = item as GaugeMetricSnapshot;
+            const { value, timestamp, labels } =
+              item as MetricTypes.Gauge.GaugeMetricSnapshot;
             metrics.push({
               name: metric.name,
               attributes: labels,
@@ -199,14 +194,14 @@ export class NewrelicMetricsReporter extends MetricReporters.Base {
               sum,
               buckets,
               quantiles,
-            } = item as HistogramMetricSnapshot;
+            } = item as MetricTypes.Histogram.HistogramMetricSnapshot;
             metrics.push({
               name: metric.name,
               type: 'summary',
               attributes: labels,
               timestamp,
               value: { count, sum, min: min || 0, max: max || 0 },
-              'interval.ms': this.opts.interval * 1000,
+              'interval.ms': (this.opts.interval || 0) * 1000,
             });
 
             if (buckets) {

@@ -27,7 +27,10 @@ export function QueueEventsClient<N extends string>(
         string,
         { events: QueueEvents; running: boolean }
       > {
-        return this.$queuesEvents;
+        return this.$queuesEvents as Map<
+          string,
+          { events: QueueEvents; running: boolean }
+        >;
       },
 
       /**
@@ -58,6 +61,11 @@ export function QueueEventsClient<N extends string>(
         jOpts?: JobsOptions,
         ttl?: number,
       ): Promise<T> {
+        if (!('addJob' in this)) {
+          throw new Error(`Missing QueueClient mixin on service ${this.name}`);
+        }
+
+        // @ts-expect-error Users MUST have QueueClient manually setup
         const job = (await this.addJob(qName, name, data, jOpts)) as Job;
 
         return job.waitUntilFinished(this.getQueueEvents(qName), ttl);
@@ -73,6 +81,11 @@ export function QueueEventsClient<N extends string>(
         jOpts?: JobsOptions,
         ttl?: number,
       ): Promise<T[]> {
+        if (!('addBulkJob' in this)) {
+          throw new Error(`Missing QueueClient mixin on service ${this.name}`);
+        }
+
+        // @ts-expect-error Users MUST have QueueClient manually setup
         const jobs = (await this.addBulkJob(qName, name, data, jOpts)) as Job[];
         const q = this.getQueueEvents(qName);
 

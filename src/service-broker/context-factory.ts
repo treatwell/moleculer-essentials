@@ -1,8 +1,10 @@
-import Moleculer, {
+import {
   Context,
   type ServiceBroker,
-  type Endpoint,
-  type GenericObject,
+  type ActionEndpoint,
+  type EventEndpoint,
+  type Span,
+  type Logger,
 } from 'moleculer';
 
 /**
@@ -13,17 +15,15 @@ export class ContextFactory<
   P = unknown,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   M extends object = {},
-  L = GenericObject,
-> extends Context<P, M, L> {
-  constructor(broker: ServiceBroker, endpoint: Endpoint) {
+  L = Record<string, unknown>,
+  H = Record<string, unknown>,
+> extends Context<P, M, L, H> {
+  constructor(broker: ServiceBroker, endpoint: ActionEndpoint | EventEndpoint) {
     super(broker, endpoint);
     this.setLogger();
   }
 
-  override startSpan(
-    name: string,
-    opts?: Moleculer.GenericObject,
-  ): Moleculer.Span {
+  override startSpan(name: string, opts?: Record<string, unknown>): Span {
     const span = super.startSpan(name, opts);
     this.setLogger();
     return span;
@@ -54,6 +54,6 @@ export class ContextFactory<
 
 declare module 'moleculer' {
   interface Context {
-    logger: Moleculer.LoggerInstance;
+    logger: Logger;
   }
 }

@@ -24,7 +24,7 @@ export function RedlockMixin(
     mixins: [GlobalStoreMixin<Redis>()],
     methods: {
       getRedlock(): Redlock {
-        return this.redlock;
+        return this.redlock as Redlock;
       },
       async withLock<T>(
         lockKey: string,

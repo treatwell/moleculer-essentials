@@ -20,7 +20,7 @@ export function QueueClient<N extends string>(
     mixins: [GlobalStoreMixin<Redis>()],
     methods: {
       _getQueues(): Map<string, Queue> {
-        return this.$queues;
+        return this.$queues as Map<string, Queue>;
       },
 
       /**

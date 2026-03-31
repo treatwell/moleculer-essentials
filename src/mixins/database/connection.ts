@@ -69,7 +69,7 @@ export function DatabaseConnectionMixin<
 
     methods: {
       getMongoClient(): MongoClient {
-        return this.mongoClient;
+        return this.mongoClient as MongoClient;
       },
       getCollection(options?: CollectionOptions): Collection<TSchema> {
         return this.getMongoClient()

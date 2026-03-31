@@ -36,7 +36,7 @@ export type GenerateDocParams = {
   /**
    * Services used to allow service level openapi specs
    */
-  services: ServiceSchema[];
+  services: ServiceSchema<{ openapi?: Record<string, unknown> }>[];
   /**
    * All path available by the moleculer-web API Gateway
    * Those should be sorted to be stable across generations.
