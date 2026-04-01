@@ -1,2 +1,5 @@
 dist/
 .yarn/
+
+# Disable generated files
+example/basic/src/call.ts

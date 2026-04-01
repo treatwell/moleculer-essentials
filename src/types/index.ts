@@ -27,6 +27,13 @@ export function wrapMixin<Settings, Methods, Mixins>(
 }
 
 /**
+ * In order to let TS emit types for inferred services, we return our own
+ * type that extend the original one.
+ * More on why: https://github.com/microsoft/TypeScript/pull/58176#issuecomment-2052698294
+ */
+export type _InferredServiceSchema = ServiceSchema;
+
+/**
  * This function is a NO-OP and is only useful for Typescript types.
  * Using Generic arguments allows TS to infer types directly from the object
  * passed as input.
@@ -36,8 +43,8 @@ export function wrapMixin<Settings, Methods, Mixins>(
  */
 export function wrapService<Settings, Methods, Mixins>(
   svc: CustomServiceSchema<Settings, Methods, Mixins>,
-): ServiceSchema {
-  return svc as ServiceSchema;
+): _InferredServiceSchema {
+  return svc as _InferredServiceSchema;
 }
 
 export type {
