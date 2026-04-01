@@ -1,0 +1,39 @@
+{
+  "name": "moleculer-essentials-example-basic",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "tsx ./src/index.ts",
+    "test": "vitest",
+    "test:types": "tsc --noEmit",
+    "test:lint": "eslint . --max-warnings=0"
+  },
+  "dependencies": {
+    "@treatwell/moleculer-essentials": "portal:../../",
+    "dotenv": "^17.3.1",
+    "fast-glob": "^3.3.3",
+    "moleculer": "^0.15.0",
+    "moleculer-web": "^0.11.0",
+    "pino": "^10.3.1",
+    "pino-http": "^11.0.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@treatwell/eslint-plugin-moleculer": "^1.1.3",
+    "@treatwell/moleculer-call-wrapper": "^1.1.0-beta.1",
+    "@tsconfig/node-lts": "^24.0.0",
+    "@types/node": "^24.12.0",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jiti": "^2.6.1",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.2"
+  },
+  "packageManager": "yarn@4.13.0"
+}

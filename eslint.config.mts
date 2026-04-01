@@ -5,7 +5,7 @@ import moleculer from '@treatwell/eslint-plugin-moleculer';
 import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
-  { ignores: ['dist/', '.pnp.*', '.yarn'] },
+  { ignores: ['dist/', '.pnp.*', '.yarn', 'example'] },
   eslint.configs.recommended,
   tseslint.configs.recommended,
   prettier,

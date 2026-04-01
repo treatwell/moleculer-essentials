@@ -50,21 +50,20 @@ To complete the TS support and improve the developer experience, we also provide
 
 ## Usage
 
+A working example is available in the [`example`](./example) folder, with a simple calculator service and an OpenAPI.
+It's a great way to start a project.
+
 ### Basic Example
 
 ```ts
 // src/index.ts
+import { join } from 'node:path';
 import fg from 'fast-glob';
 import {
-  HealthCheckMiddleware,
   createLoggerConfig,
   createServiceBroker,
-  defaultLogger,
   ZodValidator,
 } from '@treatwell/moleculer-essentials';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { config } from 'dotenv';
 
 async function run() {
   // Create Service Broker
@@ -95,7 +94,7 @@ async function run() {
 }
 
 run().catch(err => {
-  defaultLogger.error('Error while starting server', { err });
+  console.error('Error while starting server', { err });
   process.exit(1);
 });
 ```
