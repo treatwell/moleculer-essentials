@@ -1,15 +1,22 @@
 import type { ActionSchema, Context } from 'moleculer';
 import type { OperationObject } from '../openapi/index.js';
 
+/**
+ * Redefine RestSchema from API gateway to add type support
+ */
+export interface CustomRestSchema {
+  path?: string;
+  method?: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
+  fullPath?: string;
+  basePath?: string;
+  type?: 'call' | 'stream' | 'multipart';
+}
+
 export interface CustomActionSchema<T = unknown> extends Omit<
   ActionSchema,
   'params' | 'handler'
 > {
   // Params validation related fields
-  // JSONSchemaType doesn't work well when the type is unknown.
-  // There is the SomeJSONSchema type that exists but isn't working with optional props.
-  // For now I set it to `unknown` but it would be nice to replace it as soon as a correct solution
-  // exists.
   params?: unknown;
   handler?: (ctx: Context<never, never>) => Promise<T> | T;
   disableTransforms?: boolean;
@@ -20,7 +27,7 @@ export interface CustomActionSchema<T = unknown> extends Omit<
   bodySchemaRefName?: string;
 
   // API Gateway
-  rest?: string | string[];
+  rest?: CustomRestSchema | CustomRestSchema[] | string | string[];
 }
 
 export type Alias = {
