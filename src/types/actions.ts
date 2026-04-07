@@ -27,7 +27,7 @@ export interface CustomActionSchema<T = unknown> extends Omit<
   bodySchemaRefName?: string;
 
   // API Gateway
-  rest?: CustomRestSchema | CustomRestSchema[] | string | string[];
+  rest?: CustomRestSchema | CustomRestSchema[] | string | string[] | null;
 }
 
 export type Alias = {
