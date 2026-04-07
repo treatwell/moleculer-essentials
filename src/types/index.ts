@@ -1,4 +1,4 @@
-import type { ServiceSchema } from 'moleculer';
+import type { ServiceSchema, ServiceSettingSchema } from 'moleculer';
 import type {
   CustomServiceSchema,
   PartialCustomServiceSchema,
@@ -32,7 +32,8 @@ export function wrapMixin<Settings, Methods, Mixins>(
  * type that extend the original one.
  * More on why: https://github.com/microsoft/TypeScript/pull/58176#issuecomment-2052698294
  */
-export type _InferredServiceSchema = ServiceSchema;
+export type _InferredServiceSchema<TSettings = ServiceSettingSchema> =
+  ServiceSchema<TSettings>;
 
 /**
  * This function is a NO-OP and is only useful for Typescript types.
@@ -44,8 +45,8 @@ export type _InferredServiceSchema = ServiceSchema;
  */
 export function wrapService<Settings, Methods, Mixins>(
   svc: CustomServiceSchema<Settings, Methods, Mixins>,
-): _InferredServiceSchema {
-  return svc as _InferredServiceSchema;
+): _InferredServiceSchema<Settings> {
+  return svc as _InferredServiceSchema<Settings>;
 }
 
 export type {
