@@ -160,5 +160,11 @@ export function isZodSchema<S extends z.ZodType>(
   if (!_isZodType(schema)) {
     return false;
   }
-  return type ? schema.type === type : true;
+  if (!type) {
+    return true;
+  }
+
+  // Fallback to _zod.def for older zod versions (colinhacks/zod#5097)
+  const sType = schema.type || schema._zod.def.type;
+  return sType === type;
 }
