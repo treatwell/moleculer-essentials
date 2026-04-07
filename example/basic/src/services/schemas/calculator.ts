@@ -14,3 +14,9 @@ export const MultiplyParams = z.object({
 });
 
 export type MultiplyParams = z.infer<typeof MultiplyParams>;
+
+export const ParseIntParams = z.object({
+  str: z.string(),
+});
+
+export type ParseIntParams = z.infer<typeof ParseIntParams>;

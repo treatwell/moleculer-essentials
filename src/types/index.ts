@@ -1,6 +1,7 @@
 import type { ServiceSchema } from 'moleculer';
 import type {
   CustomServiceSchema,
+  PartialCustomServiceSchema,
   InternalObjectServiceThis,
   InternalCallbackServiceThis,
 } from './service.js';
@@ -21,7 +22,7 @@ import type { CustomActionSchema, Alias } from './actions.js';
  * For now, only methods are typed.
  */
 export function wrapMixin<Settings, Methods, Mixins>(
-  svc: Partial<CustomServiceSchema<Settings, Methods, Mixins>>,
+  svc: PartialCustomServiceSchema<Settings, Methods, Mixins>,
 ): typeof svc {
   return svc;
 }
@@ -50,6 +51,7 @@ export function wrapService<Settings, Methods, Mixins>(
 export type {
   Alias,
   CustomServiceSchema,
+  PartialCustomServiceSchema,
   CustomActionSchema,
   InternalObjectServiceThis,
   InternalCallbackServiceThis,
