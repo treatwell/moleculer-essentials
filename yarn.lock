@@ -41,203 +41,203 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/branch-keystore-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/branch-keystore-node@npm:4.2.2"
+"@aws-crypto/branch-keystore-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/branch-keystore-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/kms-keyring": "npm:^4.2.2"
+    "@aws-crypto/kms-keyring": "npm:^5.0.0"
     "@aws-sdk/client-dynamodb": "npm:^3.616.0"
     "@aws-sdk/client-kms": "npm:^3.616.0"
     "@aws-sdk/util-dynamodb": "npm:^3.616.0"
     tslib: "npm:^2.2.0"
     uuid: "npm:^9.0.0"
-  checksum: 10c0/c67d27f67800328caa001ce1924c4c41ad2d4209ea17437fd8a46ebf8d50f1e170cad7264358d6a37c157060c62e44ba9ca808143196068de0aaa5a58bf6e346
+  checksum: 10c0/982c8052885be8f7eb641772841ffd1c68171d60f3038d2f5122023948da037d3bcbcb5fdd6191e34c11f85188c4f6a5141578eec76af18a9c13600505ef06fc
   languageName: node
   linkType: hard
 
-"@aws-crypto/cache-material@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/cache-material@npm:4.2.2"
+"@aws-crypto/cache-material@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/cache-material@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/material-management": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     "@types/lru-cache": "npm:^5.1.0"
     lru-cache: "npm:^6.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/3af1dde9e94cfec720b1cfcc2ed4e0e172be71422709f851ea8347ec234ae7791e9e2844aa90f9037c76dbfa088dcb8c49e58997d532e6b319c5ac5880174021
+  checksum: 10c0/08524959999f02615f97fc524499eb12fe980fca9afdd87ade41f4edc2ff7f8458b3d842d5765997b46613ff25ecaef53c5f573e14406faa8128d05da86c2931
   languageName: node
   linkType: hard
 
-"@aws-crypto/caching-materials-manager-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/caching-materials-manager-node@npm:4.2.2"
+"@aws-crypto/caching-materials-manager-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/caching-materials-manager-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/cache-material": "npm:^4.2.2"
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
+    "@aws-crypto/cache-material": "npm:^5.0.0"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/5d84afae184074507236bbadf1bd2429ea2110ad4cf157bb0b7e3ea4073d389df641e68c6649ebd5bea4f9bdb602ea14f049c1f296a033fddaa9f6b4654d4054
+  checksum: 10c0/66dbd89f288cdd54e2e664b543fb51b09ed60140de09b59d1f1994a96a935b542cb33ebbe79f31660e1ed72000492cb1cd975fe6400be8f32a8629e9a57cd633
   languageName: node
   linkType: hard
 
-"@aws-crypto/client-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/client-node@npm:4.2.2"
+"@aws-crypto/client-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/client-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/branch-keystore-node": "npm:^4.2.2"
-    "@aws-crypto/caching-materials-manager-node": "npm:^4.2.2"
-    "@aws-crypto/decrypt-node": "npm:^4.2.2"
-    "@aws-crypto/encrypt-node": "npm:^4.2.2"
-    "@aws-crypto/kms-keyring": "npm:^4.2.2"
-    "@aws-crypto/kms-keyring-node": "npm:^4.2.2"
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
-    "@aws-crypto/raw-aes-keyring-node": "npm:^4.2.2"
-    "@aws-crypto/raw-rsa-keyring-node": "npm:^4.2.2"
+    "@aws-crypto/branch-keystore-node": "npm:^5.0.0"
+    "@aws-crypto/caching-materials-manager-node": "npm:^5.0.0"
+    "@aws-crypto/decrypt-node": "npm:^5.0.0"
+    "@aws-crypto/encrypt-node": "npm:^5.0.0"
+    "@aws-crypto/kms-keyring": "npm:^5.0.0"
+    "@aws-crypto/kms-keyring-node": "npm:^5.0.0"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
+    "@aws-crypto/raw-aes-keyring-node": "npm:^5.0.0"
+    "@aws-crypto/raw-rsa-keyring-node": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/cdbf17f8af4a948851eaf1ad855148d67dcc28d1e50797ba8a2e850ed688c04e3fb5f46dfcbc6f5f8d2970c903ee9cad024af15afaaea45ed017474911c3d7da
+  checksum: 10c0/465973c18d77e5d57ecb22c6528cba4a17f9aeca71705dc23492748729cd414b953591dd343cb53c9b63ae01868fe991928c6fde8e52ba6450bb15fe3588a835
   languageName: node
   linkType: hard
 
-"@aws-crypto/decrypt-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/decrypt-node@npm:4.2.2"
+"@aws-crypto/decrypt-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/decrypt-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     "@types/duplexify": "npm:^3.6.0"
     duplexify: "npm:^4.1.1"
     readable-stream: "npm:^3.6.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/05629ae0e20ca32eac991b1c5672c620b89bc6b57e7744d68de124490efc3eb41f3eea7b6018361dbebfc2e4a84da57e4b4b04309f691b49cf2727a357d1361e
+  checksum: 10c0/bb3fbb6e8c47847ad68efb6a5a5a707ab2e7773829f576f7e4e1f52ad418aa4901b3d51704f19169e39e3da0c141a73f901017f27e863320cb7597e227e648b9
   languageName: node
   linkType: hard
 
-"@aws-crypto/encrypt-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/encrypt-node@npm:4.2.2"
+"@aws-crypto/encrypt-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/encrypt-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     "@types/duplexify": "npm:^3.6.0"
     duplexify: "npm:^4.1.3"
     readable-stream: "npm:^3.6.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/fe67015a094f280ba99f30081027e565407f8b8db6b90ae1c5ba21425c5bd43676e45cad5bb69f951dff75e5937158c389eb30d69c2523351b4d93b90d303dc8
+  checksum: 10c0/d38f972428524a01a2794e924b618b63e49c9367800d401cbf7f8e96cc1e2ea377dafd5f904b7b00ac0f6c793bf59f91486d8708dd59460d1b2048369172f0c9
   languageName: node
   linkType: hard
 
-"@aws-crypto/hkdf-node@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@aws-crypto/hkdf-node@npm:4.0.0"
+"@aws-crypto/hkdf-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/hkdf-node@npm:5.0.0"
   dependencies:
     tslib: "npm:^2.2.0"
-  checksum: 10c0/e66b5d1b5c47b786875d71f7e7789647908f36075ad2c52946e5772cd13bf355ae8e18f7b9ec8389aa8feef69de340ca342646b21c08295ea38c74f478dfe564
+  checksum: 10c0/f6711af44f54e99327bc36d20f3392782f9c3ca4bf4fb11fe94c2d751222a04b81ecb638fa8d827a2158784c2ce8164f69522511ed870a11e230297193f69131
   languageName: node
   linkType: hard
 
-"@aws-crypto/kdf-ctr-mode-node@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@aws-crypto/kdf-ctr-mode-node@npm:4.1.0"
+"@aws-crypto/kdf-ctr-mode-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/kdf-ctr-mode-node@npm:5.0.0"
   dependencies:
     tslib: "npm:^2.2.0"
-  checksum: 10c0/0d0096596cf3382e17bd9aa865c0765f8b56b00afdc844c965d7712347b916a92a130462b25f534184a9d67f2d96d177c2c0c82dacef40748b285de1475584bf
+  checksum: 10c0/41d8f9a28604e2b9a8ca861afd622e5defbad3b4752caf8b5de55a8ccec79da06f9d05f0d312320a4d1bdedb8614c062ebb8b4b640fa8d5d693e748210391f8f
   languageName: node
   linkType: hard
 
-"@aws-crypto/kms-keyring-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/kms-keyring-node@npm:4.2.2"
+"@aws-crypto/kms-keyring-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/kms-keyring-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/branch-keystore-node": "npm:^4.2.2"
-    "@aws-crypto/cache-material": "npm:^4.2.2"
-    "@aws-crypto/kdf-ctr-mode-node": "npm:^4.1.0"
-    "@aws-crypto/kms-keyring": "npm:^4.2.2"
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/branch-keystore-node": "npm:^5.0.0"
+    "@aws-crypto/cache-material": "npm:^5.0.0"
+    "@aws-crypto/kdf-ctr-mode-node": "npm:^5.0.0"
+    "@aws-crypto/kms-keyring": "npm:^5.0.0"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     "@aws-sdk/client-dynamodb": "npm:^3.621.0"
     "@aws-sdk/client-kms": "npm:^3.362.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/c760d7325bb0b69f4dec897e635606e1a50164415c1a2b4e0ed6322beeb47eaec71270e0b4a3bcb2ae3797bea25ec8a3a5a593b7b060e91a63f80767a228d75f
+  checksum: 10c0/257f281a210c2e397db8bb81ee3e3568ba1e54a75fdaf6b98a7bdd3e2b7391cdbe85f8bb48a2f825c831b8a9d9a29f9c6847bab39f0d8e418819d93871f9674d
   languageName: node
   linkType: hard
 
-"@aws-crypto/kms-keyring@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/kms-keyring@npm:4.2.2"
+"@aws-crypto/kms-keyring@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/kms-keyring@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management": "npm:^4.2.2"
+    "@aws-crypto/material-management": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/5e03dee9f971dde96c52bd0757a8590a81d2ed3814db3619d743df3b705a9e0de2098ffd28d8c8665c7dad0d8be0e3be0186e5205af4b3d4add932f82e57bc50
+  checksum: 10c0/c1d28a531abd5a9fbd984be5873cbb129f4512b3560704d8b4769461e40625f9fe73b1272e89f8c5a3e3c64e6f4c528eac91a5c73c5546d90fc52782d46af740
   languageName: node
   linkType: hard
 
-"@aws-crypto/material-management-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/material-management-node@npm:4.2.2"
+"@aws-crypto/material-management-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/material-management-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/hkdf-node": "npm:^4.0.0"
-    "@aws-crypto/material-management": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/hkdf-node": "npm:^5.0.0"
+    "@aws-crypto/material-management": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/3e336e1d57798dc5bbd35ff6adaa0742853f002e66e68d088e9bf3fb8ad6fbe13f9a8a5fb5ca328c3b9417c869757cd772ecb4b7ac3801d3c40a222262b9cc4e
+  checksum: 10c0/33e312e828cd1429ba0ebe3f915a5e7db4a38e685395fa7c811eac5ab537b07d472dbd2965691662e90e737018b4d4250d0f4320ed33074331e2f4cb0b3ccfce
   languageName: node
   linkType: hard
 
-"@aws-crypto/material-management@npm:*, @aws-crypto/material-management@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/material-management@npm:4.2.2"
+"@aws-crypto/material-management@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/material-management@npm:5.0.0"
   dependencies:
     asn1.js: "npm:^5.3.0"
     bn.js: "npm:^5.2.3"
     tslib: "npm:^2.2.0"
     uuid: "npm:^10.0.0"
-  checksum: 10c0/09f5301733f941e9a2d5c809644a92882dc9125338bc7b52e789ce81fbcab6fd58d58c54bf2604585f0db5b5d72758eba9db0474adceab3a94ac24988e279890
+  checksum: 10c0/51b1f5505aef2372e13e9b358d0e9c5581ae93252d5835eaa4bb91cc931c6bbe9b4e00a53da0558ed2db347f7b476f8ba803caef093b619d4732cc4c473dfd75
   languageName: node
   linkType: hard
 
-"@aws-crypto/raw-aes-keyring-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/raw-aes-keyring-node@npm:4.2.2"
+"@aws-crypto/raw-aes-keyring-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/raw-aes-keyring-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
-    "@aws-crypto/raw-keyring": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
+    "@aws-crypto/raw-keyring": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/30edd5d6815f589f1aa31403a9c815fe73aa3b51aff471492cee93aa9fbf41b50e00d0967ae3449c245531716b513ea12e2447b34fbe0f30ef44772e394e765d
+  checksum: 10c0/6fd489a3eac4228bed5937d0b1c993393f83f30d9af0181f162a4e2eccbce6ad9f4912f376ea6a5de190f2402ebdba1b75ebf00673bacb1352bd6c009ebefde1
   languageName: node
   linkType: hard
 
-"@aws-crypto/raw-keyring@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/raw-keyring@npm:4.2.2"
+"@aws-crypto/raw-keyring@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/raw-keyring@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management": "npm:^4.2.2"
-    "@aws-crypto/serialize": "npm:^4.2.2"
+    "@aws-crypto/material-management": "npm:^5.0.0"
+    "@aws-crypto/serialize": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/db58eba1bc308035069fdc7dde6a5b7b7bcd9418d45067a062b063ee0f12b71f80f624c3102a5130ec3a93b0bd1d5237f5531a9a55d18a8b4aa069fd2a9a4514
+  checksum: 10c0/f01457dbbedd37cdd206b2ef319180825ee5f4809a49a7f7e08db432ab16c842d1f45c7f15f340716918ba447aecee8f7faae85e1a5f6de656839e84b77265ef
   languageName: node
   linkType: hard
 
-"@aws-crypto/raw-rsa-keyring-node@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/raw-rsa-keyring-node@npm:4.2.2"
+"@aws-crypto/raw-rsa-keyring-node@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/raw-rsa-keyring-node@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management-node": "npm:^4.2.2"
-    "@aws-crypto/raw-keyring": "npm:^4.2.2"
+    "@aws-crypto/material-management-node": "npm:^5.0.0"
+    "@aws-crypto/raw-keyring": "npm:^5.0.0"
     tslib: "npm:^2.2.0"
-  checksum: 10c0/41155f4014011a86a1fdca50f84c1ec68065dac9650291790371af5a30546734a7b50ed974e2e44da2c7e2d6b292be0abd396dc39d81afa8e25497b2f93903a8
+  checksum: 10c0/8b7166df2cc1b773e24a24ec2ae17f6652797a3c68c8ff3dd1a13199da3658a8ca8d6f37401127acd2f87614d8763aa551a6741563fe99956718062050329cd1
   languageName: node
   linkType: hard
 
-"@aws-crypto/serialize@npm:*, @aws-crypto/serialize@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@aws-crypto/serialize@npm:4.2.2"
+"@aws-crypto/serialize@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/serialize@npm:5.0.0"
   dependencies:
-    "@aws-crypto/material-management": "npm:^4.2.2"
+    "@aws-crypto/material-management": "npm:^5.0.0"
     asn1.js: "npm:^5.3.0"
     bn.js: "npm:^5.2.3"
     tslib: "npm:^2.2.0"
     uuid: "npm:^10.0.0"
-  checksum: 10c0/278f414343d539ad472dee2fd9b7cb9f538871a3532d16cc17b0912ff089f0fb127ad726611fa7c4ea283fc81eb03ca512664746a8a6b0764878f10650433a47
+  checksum: 10c0/e349b24b022c8758d203c3c97ce420f263f5d9c6696beb5b19435b69365c68422396eccbfad6f441289bec43f0c4f528f431a42fe359accf0944349dfbed6ba2
   languageName: node
   linkType: hard
 
@@ -2761,7 +2761,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@treatwell/moleculer-essentials@workspace:."
   dependencies:
-    "@aws-crypto/client-node": "npm:^4.2.2"
+    "@aws-crypto/client-node": "npm:^5.0.0"
     "@eslint/js": "npm:^10.0.1"
     "@treatwell/eslint-plugin-moleculer": "npm:^1.1.3"
     "@tsconfig/node-lts": "npm:^24.0.0"
