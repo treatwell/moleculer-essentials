@@ -168,7 +168,7 @@
     "mongodb": "^7.1.1",
     "mongodb-memory-server": "^11.0.1",
     "pkgroll": "2.27.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "redlock": "^4.2.0",
     "semantic-release": "^25.0.3",
     "typescript": "~5.9.3",
