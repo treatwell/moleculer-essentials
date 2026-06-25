@@ -1,3 +1,5 @@
+import { gzip } from 'node:zlib';
+import { promisify } from 'node:util';
 import { defaultsDeep } from 'es-toolkit/compat';
 import {
   type Logger,
@@ -6,6 +8,8 @@ import {
   TracerExporters,
 } from 'moleculer';
 import { flattenTags } from './utils.js';
+
+const gzipPromise = promisify(gzip);
 
 export type NewrelicTraceExporterOptions = {
   logger?: Logger;
@@ -126,9 +130,10 @@ export class NewrelicTraceExporter extends TracerExporters.Base {
     try {
       const res = await fetch(`${this.opts.baseURL}/trace/v1`, {
         method: 'post',
-        body: JSON.stringify(data),
+        body: await gzipPromise(JSON.stringify(data)),
         headers: {
           'Content-Type': 'application/json',
+          'Content-Encoding': 'gzip',
           'Api-Key': this.opts.insertKey,
           'Data-Format': 'newrelic',
           'Data-Format-Version': '1',
