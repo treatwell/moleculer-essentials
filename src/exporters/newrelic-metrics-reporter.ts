@@ -59,8 +59,6 @@ type NewrelicMetricsOptions = MetricReporters.Base.MetricReporterOptions & {
  * NewRelic API: https://docs.newrelic.com/docs/data-apis/understand-data/metric-data/metric-data-type/
  */
 export class NewrelicMetricsReporter extends MetricReporters.Base {
-  private readonly opts: NewrelicMetricsOptions = {};
-
   private timer: NodeJS.Timeout | null = null;
 
   private defaultTags: DefaultTags | null = {};
@@ -240,5 +238,14 @@ export class NewrelicMetricsReporter extends MetricReporters.Base {
         metrics,
       },
     ];
+  }
+}
+
+declare module 'moleculer' {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace MetricReporters {
+    export interface Base {
+      opts: NewrelicMetricsOptions;
+    }
   }
 }

@@ -52,8 +52,6 @@ export type NewrelicTraceExporterOptions = {
  * API v2: https://zipkin.io/zipkin-api/#/
  */
 export class NewrelicTraceExporter extends TracerExporters.Base {
-  private readonly opts: NewrelicTraceExporterOptions = {};
-
   private queue: Span[];
 
   private timer: NodeJS.Timeout | null = null;
@@ -189,5 +187,14 @@ export class NewrelicTraceExporter extends TracerExporters.Base {
         ...(flattenTags(this.errorToObject(span.error!), true, 'error') || {}),
       },
     };
+  }
+}
+
+declare module 'moleculer' {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace TracerExporters {
+    export interface Base {
+      opts: NewrelicTraceExporterOptions;
+    }
   }
 }
