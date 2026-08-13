@@ -44,7 +44,7 @@ interface StringKeywords {
 
 export type JSONSchemaType<T, IsPartial extends boolean = false> = (
   | // these two unions allow arbitrary unions of types
-  {
+    {
       anyOf: readonly JSONSchemaType<T, IsPartial>[];
     }
   | {
@@ -95,11 +95,10 @@ export type JSONSchemaType<T, IsPartial extends boolean = false> = (
                   instanceof: 'Buffer';
                 }
               : T extends null
-                ?
-                    | {
-                        type: JSONType<'null', IsPartial>;
-                      }
-                    | { nullable?: true }
+                ? | {
+                      type: JSONType<'null', IsPartial>;
+                    }
+                  | { nullable?: true }
                 : T extends ObjectId
                   ? {
                       type: JSONType<'string', IsPartial>;
@@ -115,8 +114,7 @@ export type JSONSchemaType<T, IsPartial extends boolean = false> = (
                         } & { length: T['length'] };
                         minItems: T['length'];
                       } & (
-                        | { maxItems: T['length'] }
-                        | { additionalItems: false }
+                        { maxItems: T['length'] } | { additionalItems: false }
                       )
                     : T extends readonly any[]
                       ? {
@@ -143,11 +141,9 @@ export type JSONSchemaType<T, IsPartial extends boolean = false> = (
                               ? Readonly<(keyof T)[]>
                               : Readonly<RequiredMembers<T>[]>;
                             additionalProperties?:
-                              | boolean
-                              | JSONSchemaType<T[string]>;
+                              boolean | JSONSchemaType<T[string]>;
                             unevaluatedProperties?:
-                              | boolean
-                              | JSONSchemaType<T[string]>;
+                              boolean | JSONSchemaType<T[string]>;
                             discriminator?: {
                               propertyName: keyof T;
                             };
@@ -166,8 +162,7 @@ export type JSONSchemaType<T, IsPartial extends boolean = false> = (
                             };
                             dependencies?: {
                               [K in keyof T]?:
-                                | Readonly<(keyof T)[]>
-                                | PartialSchema<T>;
+                                Readonly<(keyof T)[]> | PartialSchema<T>;
                             };
                             dependentRequired?: {
                               [K in keyof T]?: Readonly<(keyof T)[]>;

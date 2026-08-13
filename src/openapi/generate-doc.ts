@@ -19,14 +19,7 @@ import { OpenAPIExtractor } from './openapi-extractor.js';
 import { isZodSchema, zodToOpenAPISchema } from '../zod/zod-helpers.js';
 
 type HTTPMethod =
-  | 'get'
-  | 'put'
-  | 'post'
-  | 'delete'
-  | 'options'
-  | 'head'
-  | 'patch'
-  | 'trace';
+  'get' | 'put' | 'post' | 'delete' | 'options' | 'head' | 'patch' | 'trace';
 
 export type GenerateDocParams = {
   /**

@@ -13,9 +13,7 @@ import type {
 } from 'mongodb';
 
 export type DatabaseSoftDeleteScope =
-  | 'include-deleted'
-  | 'only-deleted'
-  | 'no-deleted';
+  'include-deleted' | 'only-deleted' | 'no-deleted';
 
 /**
  * Options used on read only operations on the database mixin.
