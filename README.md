@@ -14,6 +14,7 @@
   - [Basic Example](#basic-example)
 - [Mixins](#mixins)
 - [License](#license)
+
 <!-- TOC -->
 
 > [!WARNING]

@@ -121,19 +121,10 @@ export type DatabaseActionOptions<
 };
 
 export type DatabaseActionInternalNames =
-  | 'find'
-  | 'findStream'
-  | 'getInternal'
-  | 'countInternal';
+  'find' | 'findStream' | 'getInternal' | 'countInternal';
 
 export type DatabaseActionPublishedNames =
-  | 'count'
-  | 'list'
-  | 'get'
-  | 'create'
-  | 'update'
-  | 'remove';
+  'count' | 'list' | 'get' | 'create' | 'update' | 'remove';
 
 export type DatabaseActionNames =
-  | DatabaseActionInternalNames
-  | DatabaseActionPublishedNames;
+  DatabaseActionInternalNames | DatabaseActionPublishedNames;

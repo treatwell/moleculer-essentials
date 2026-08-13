@@ -16,8 +16,7 @@ export type Selector = {
 };
 
 export type ServiceMetadata =
-  | Record<string, LabelValue | number | boolean>
-  | undefined;
+  Record<string, LabelValue | number | boolean> | undefined;
 
 export function isServiceSelected(
   metadata: ServiceMetadata,

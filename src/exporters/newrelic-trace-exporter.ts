@@ -39,8 +39,7 @@ export type NewrelicTraceExporterOptions = {
    * Default span tags.
    */
   defaultTags?:
-    | Record<string, unknown>
-    | ((tracer?: unknown) => Record<string, unknown>);
+    Record<string, unknown> | ((tracer?: unknown) => Record<string, unknown>);
 };
 
 /**

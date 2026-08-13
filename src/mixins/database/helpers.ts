@@ -46,7 +46,7 @@ export function optimizeQuery<T extends Record<string, unknown>>(
  */
 export function getQueryFromList<
   T extends 'sort' | 'projection',
-  NotOp extends T extends 'sort' ? -1 : 0,
+  NotOp extends (T extends 'sort' ? -1 : 0),
 >(type: T, list?: string[]): Record<string, 1 | NotOp> | undefined {
   if (!list?.length) {
     return undefined;
