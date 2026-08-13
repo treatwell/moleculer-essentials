@@ -107,34 +107,42 @@ export function zodToOpenAPISchema(
   return res as SomeJSONSchema;
 }
 
-export const zodDate = z
-  .transform(val => {
-    if (typeof val === 'string') {
-      const date = parseISO(val);
-      if (!Number.isNaN(date.getTime())) {
-        return date;
+// Starting zod v4.4 (colinhacks/zod#5941), z.transform(fn) have an optional
+// input. We force to be required with z.nonoptional.
+export const zodDate = z.nonoptional(
+  z
+    .transform(val => {
+      if (typeof val === 'string') {
+        const date = parseISO(val);
+        if (!Number.isNaN(date.getTime())) {
+          return date;
+        }
       }
-    }
-    return val;
-  })
-  .pipe(z.date());
+      return val;
+    })
+    .pipe(z.date()),
+);
 
 const OBJECT_ID_PATTERN = /^[a-f\d]{24}$/i;
 function isObjectId(val: unknown): val is ObjectId {
   return val instanceof ObjectId;
 }
 
-export const zodObjectId = z
-  .transform(val => {
-    // Better use a regex since ObjectId.isValid isn't 100% reliable
-    // to test if a string is an object id: ObjectId('babyliss-pro') === true
-    if (typeof val === 'string' && OBJECT_ID_PATTERN.test(val)) {
-      return new ObjectId(val);
-    }
-    return val;
-  })
-  .pipe(z.custom<ObjectId>(isObjectId, { abort: true }))
-  .meta({ id: 'ObjectId' });
+// Starting zod v4.4 (colinhacks/zod#5941), z.transform(fn) have an optional
+// input. We force to be required with z.nonoptional.
+export const zodObjectId = z.nonoptional(
+  z
+    .transform(val => {
+      // Better use a regex since ObjectId.isValid isn't 100% reliable
+      // to test if a string is an object id: ObjectId('babyliss-pro') === true
+      if (typeof val === 'string' && OBJECT_ID_PATTERN.test(val)) {
+        return new ObjectId(val);
+      }
+      return val;
+    })
+    .pipe(z.custom<ObjectId>(isObjectId, { abort: true }))
+    .meta({ id: 'ObjectId' }),
+);
 
 export function zodCoerceArray<T extends ZodType>(
   element: T,

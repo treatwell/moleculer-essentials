@@ -132,6 +132,52 @@ describe('zodToOpenAPISchema', () => {
       },
     });
   });
+
+  it('should have date in objects as required field', () => {
+    const doc: Document = {
+      openapi: '',
+      info: { title: 'Test', version: '0' },
+      paths: {},
+    };
+    const extractor = new OpenAPIExtractor(doc);
+
+    const res = zodToOpenAPISchema(
+      z.object({ b: zodDate, c: zodDate.optional() }),
+      extractor,
+    );
+
+    expect(res).toEqual({
+      type: 'object',
+      required: ['b'],
+      properties: {
+        b: { type: 'string', format: 'date-time' },
+        c: { type: 'string', format: 'date-time' },
+      },
+    });
+  });
+
+  it('should have objectids in objects as required field', () => {
+    const doc: Document = {
+      openapi: '',
+      info: { title: 'Test', version: '0' },
+      paths: {},
+    };
+    const extractor = new OpenAPIExtractor(doc);
+
+    const res = zodToOpenAPISchema(
+      z.object({ b: zodObjectId, c: zodObjectId.optional() }),
+      extractor,
+    );
+
+    expect(res).toEqual({
+      type: 'object',
+      required: ['b'],
+      properties: {
+        b: { $ref: '#/components/schemas/ObjectId' },
+        c: { $ref: '#/components/schemas/ObjectId' },
+      },
+    });
+  });
 });
 
 describe('zodObjectId', () => {
