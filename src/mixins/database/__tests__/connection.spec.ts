@@ -17,12 +17,25 @@ describe('DB Mixin V2 connection', () => {
   const svcB = broker.createService(
     wrapService({
       name: 'test-b',
-      mixins: [DatabaseConnectionMixin({ collectionName: 'test-b' })],
+      mixins: [
+        DatabaseConnectionMixin({
+          collectionName: 'test-b',
+          createCollectionOptions: { collation: { locale: 'fr' } },
+        }),
+      ],
+    }),
+  );
+
+  const svcC = broker.createService(
+    wrapService({
+      name: 'test-c',
+      mixins: [DatabaseConnectionMixin({ collectionName: undefined })],
     }),
   );
 
   const clientA = svcA.getMongoClient() as MongoClient;
   const clientB = svcB.getMongoClient() as MongoClient;
+  const clientC = svcC.getMongoClient() as MongoClient;
 
   beforeAll(async () => {
     await broker.start();
@@ -31,7 +44,25 @@ describe('DB Mixin V2 connection', () => {
 
   it('should reuse clients', () => {
     expect(clientA).toBeInstanceOf(MongoClient);
-    expect(clientA).toBe(clientB);
+    expect(clientB).toBe(clientA);
+    expect(clientC).toBe(clientA);
+  });
+
+  it('should have created collections with related options', async () => {
+    const cols = await svcA.getMongoDb().listCollections().toArray();
+
+    expect(cols.length).toEqual(2);
+    expect(cols).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ name: 'test-a' }),
+        expect.objectContaining({
+          name: 'test-b',
+          options: expect.objectContaining({
+            collation: expect.objectContaining({ locale: 'fr' }),
+          }),
+        }),
+      ]),
+    );
   });
 
   it('should successfully connect to mongo server', async () => {
