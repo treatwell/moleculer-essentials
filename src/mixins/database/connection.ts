@@ -4,6 +4,8 @@ import {
   MongoClient,
   type CreateCollectionOptions,
   type MongoError,
+  type Db,
+  type DbOptions,
 } from 'mongodb';
 import { wrapMixin } from '../../types/index.js';
 import { GlobalStoreMixin } from '../global-store.mixin.js';
@@ -19,13 +21,14 @@ export type DatabaseConnectionOptions = {
    * Name of the database to use.
    * If not specified, will use the default one (inferred from uri).
    *
-   * OVERRIDDEN by globalThis.__MONGO_DB_NAME__ if set, which is useful for tests.
+   * OVERRIDDEN by `globalThis.__MONGO_DB_NAME__` if set, which is useful for tests.
    */
   databaseName?: string;
   /**
-   * Name of the collection in the DB.
+   * Name of the collection in the DB. If undefined, will throw on `getCollection` method
+   * and will not try to create the collection.
    */
-  collectionName: string;
+  collectionName: string | undefined;
   /**
    * Collection creation options.
    * If not specified, will use the default one.
@@ -40,7 +43,7 @@ export type DatabaseConnectionOptions = {
    * - process.env.MONGODB_URL
    * - 'mongodb://localhost:27017' (default)
    *
-   * OVERRIDDEN by globalThis.__MONGO_URI__ if set, which is useful for tests.
+   * OVERRIDDEN by `globalThis.__MONGO_URI__` if set, which is useful for tests.
    */
   uri?: string;
 };
@@ -71,9 +74,20 @@ export function DatabaseConnectionMixin<
       getMongoClient(): MongoClient {
         return this.mongoClient as MongoClient;
       },
-      getCollection(options?: CollectionOptions): Collection<TSchema> {
+      getMongoDb(options?: DbOptions): Db {
+        return this.getMongoClient().db(dbName, options);
+      },
+      getCollection(
+        options?: CollectionOptions,
+        dbOptions?: DbOptions,
+      ): Collection<TSchema> {
+        if (!collectionName) {
+          throw new Error(
+            'No collectionName was provided in DatabaseConnectionMixin',
+          );
+        }
         return this.getMongoClient()
-          .db(dbName)
+          .db(dbName, dbOptions)
           .collection<TSchema>(collectionName, options);
       },
     },
@@ -101,16 +115,23 @@ export function DatabaseConnectionMixin<
       // Mongo driver already have a lock that will return the same promise if it's already connecting
       this.logger.debug('Service connecting to mongoDB');
       await this.getMongoClient().connect();
-      this.logger.debug('Service connected to mongoDB, creating collection');
-      try {
-        await this.getMongoClient()
-          .db(dbName)
-          .createCollection(collectionName, createCollectionOptions);
-      } catch (err) {
-        // Code 48 === Collection already exists
-        if ((err as MongoError)?.code !== 48) {
-          this.logger.error('Error while creating collection', { err });
+
+      if (collectionName) {
+        this.logger.debug('Service connected to mongoDB, creating collection');
+        try {
+          await this.getMongoClient()
+            .db(dbName)
+            .createCollection(collectionName, createCollectionOptions);
+        } catch (err) {
+          // Code 48 === Collection already exists
+          if ((err as MongoError)?.code !== 48) {
+            this.logger.error('Error while creating collection', { err });
+          }
         }
+      } else {
+        this.logger.debug(
+          'Service connected to mongoDB, no collection defined',
+        );
       }
     },
     async stopped() {
