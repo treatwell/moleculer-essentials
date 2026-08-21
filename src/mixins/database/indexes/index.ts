@@ -1,5 +1,5 @@
 import { isEqual } from 'es-toolkit';
-import type { Collection } from 'mongodb';
+import type { Collection, Db } from 'mongodb';
 import type { Context } from 'moleculer';
 import { wrapMixin } from '../../../types/index.js';
 import {
@@ -122,11 +122,19 @@ async function getIndexesDifference(
 }
 
 export type DatabaseIndexesOptions = {
+  /**
+   * Mostly useful when no collectionName was provided on the underlying DatabaseConnectionMixin.
+   * It allows users to have multiple DatabaseIndexesMixin on the same service.
+   *
+   * Using a different collectionName from the one specified in DatabaseConnectionMixin is NOT recommended.
+   */
+  collectionName?: string;
   indexes?: IndexTuple[];
   searchIndexes?: Record<string, SearchIndexDefinition>;
 };
 
 export type SyncIndexesOptions = {
+  collectionName?: string;
   createIndexes: boolean;
   dropIndexes: boolean;
 };
@@ -134,23 +142,37 @@ export type SyncIndexesOptions = {
 export const DATABASE_INDEXES_MIXIN_SYNC_EVENT = 'database-indexes-mixin.sync';
 
 export function DatabaseIndexesMixin(opts: DatabaseIndexesOptions) {
+  // important to extract them in the closure to allow multiple mixins
+  const { collectionName: mixinCollectionName, searchIndexes, indexes } = opts;
+
   return wrapMixin({
     methods: {
       async _syncIndexes({
+        collectionName,
         dropIndexes,
         createIndexes,
       }: SyncIndexesOptions): Promise<void> {
-        if (typeof this.getCollection !== 'function') {
+        if (
+          typeof this.getCollection !== 'function' ||
+          typeof this.getMongoDb !== 'function'
+        ) {
           throw new Error(
-            'getCollection method not found, did you add the DatabaseConnectionMixin?',
+            'getCollection or getMongoDb method not found, did you add the DatabaseConnectionMixin?',
           );
         }
-        const collection = this.getCollection() as Collection;
+
+        let collection: Collection;
+        if (collectionName) {
+          const db = this.getMongoDb() as Db;
+          collection = db.collection(collectionName);
+        } else {
+          collection = this.getCollection();
+        }
 
         const states = await getIndexesDifference(
           collection,
-          opts.indexes,
-          opts.searchIndexes,
+          indexes,
+          searchIndexes,
         );
 
         const notOkStates = states.filter(s => s.status !== IndexStatus.OK);
@@ -229,12 +251,17 @@ export function DatabaseIndexesMixin(opts: DatabaseIndexesOptions) {
           ctx.logger.info(
             `Received sync indexes event for service ${this.name}`,
           );
-          await this._syncIndexes({ createIndexes: true, dropIndexes: false });
+          await this._syncIndexes({
+            collectionName: mixinCollectionName,
+            createIndexes: true,
+            dropIndexes: false,
+          });
         },
       },
       '$broker.started': {
         async handler(): Promise<void> {
           await this._syncIndexes({
+            collectionName: mixinCollectionName,
             createIndexes: shouldAutoCreateIndexes(),
             dropIndexes: shouldAutoDropIndexes(),
           });
